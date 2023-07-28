@@ -18,11 +18,30 @@ ADMINISTRADOR
 ○ ...
 ● Puede modificar o eliminar un entrenamiento
 
-USUARIO (NO ADMINISTRADOR)
+USUARIOS Y TRABAJADORES
 - Puede ver el listado del los ejercicios y entrar en el detalle de los mismos.
 - Podrá filtrarlos por algunas características (ej: tipología o grupo muscular).
 - Podrá poner o quitar un like a un ejercicio.
 
 OPCIONAL
-● Los usuarios (no administrador) pueden seleccionar algunos ejercicios para ponerlos
+● Los usuarios y trabajadores  pueden seleccionar algunos ejercicios para ponerlos
 entre los favoritos, útil para poder organizar una clase de entrenamiento.
+
+● SEMÁFORO DE FLUJO DE TRABAJO
+En proceso
+Errores por corregir
+Terminado
+
+● BASES DE DATOS
+
+● EXTENSIONES NPM USADAS
+
+
+● ENDPOINTS TRABAJADORES
+
+● ENDPOINTS USUARIOS
+
+● ENDPOINTS EJERCICIOS
+
+
+
