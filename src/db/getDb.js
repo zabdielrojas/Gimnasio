@@ -1,10 +1,9 @@
 const mysql = require("mysql2/promise");
 
-//require("dotenv").config();
+require("dotenv").config();
 
-const { MYSQL_HOST, MYSQL_USER, MYSQL_PASS, MYSQL_DB } = process.env;
+const { MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE } = process.env;
 
-// Variable que almacenará un grupo de conexiones.
 let pool;
 
 const getDb = async () => {
@@ -14,30 +13,32 @@ const getDb = async () => {
         connectionLimit: 10,
         host: MYSQL_HOST,
         user: MYSQL_USER,
-        password: MYSQL_PASS,
+        password: MYSQL_PASSWORD,
+        database: MYSQL_DATABASE,
+        timezone: "Z",
       });
-       // Con la conexión anterior creamos la base de datos si no existe.
-       await dbConnection.query(
-        `CREATE DATABASE IF NOT EXISTS ${MYSQL_DB}`
-    );
 
-    // Creamos un grupo de conexiones.
-    pool = mysql.createPool({
+      // Verificar la conexión exitosa
+      console.log("Connecting to the database...");
+      await dbConnection.query("SELECT 1");
+
+      // Creamos un grupo de conexiones.
+      pool = mysql.createPool({
         connectionLimit: 10,
         host: MYSQL_HOST,
         user: MYSQL_USER,
-        password: MYSQL_PASS,
-        database: MYSQL_DB,
-        timezone: 'Z',
-    });
+        password: MYSQL_PASSWORD,
+        database: MYSQL_DATABASE,
+        timezone: "Z",
+      });
     }
-    
-// Retornamos una conexión libre.
+
+    // Retornamos una conexión libre.
     return await pool.getConnection();
   } catch (err) {
     console.error(err);
   }
 };
-// Exportamos la función.
 
+// Exportamos la función.
 module.exports = getDb;
