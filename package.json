@@ -4,7 +4,7 @@
   "description": "Aplicación para organizar internamente los entrenamientos en un gimnasio.",
   "app": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon ./app.js"
   },
   "keywords": [],
   "author": "",
