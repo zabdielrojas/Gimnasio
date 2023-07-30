@@ -1,8 +1,8 @@
 const mysql = require("mysql2/promise");
 
-require("dotenv").config();
+//require("dotenv").config();
 
-const { MYSQL_HOST, MYSQL_USER, MYSQL_PASS } = process.env.data;
+const { MYSQL_HOST, MYSQL_USER, MYSQL_PASS } = process.env;
 
 let pool;
 
