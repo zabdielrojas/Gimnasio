@@ -1,9 +1,13 @@
 "use strict";
 
-const express = require("express");
-
 // Creamos el servidor.
+const express = require("express");
 const app = express();
+
+app.get("/search", (req, res) => {
+  console.log(req.query);
+  res.end();
+});
 // Ponemos el servidor a escuchar peticiones en un puerto dado.
 app.listen(8000, () => {
   console.log("Server listening at http://localhost:8000");
