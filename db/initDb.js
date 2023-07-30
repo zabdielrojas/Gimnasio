@@ -1,27 +1,27 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const getDb = require('./getDb');
+const getDb = require("./getDb");
 
-const main = async () => {
-    let connection;
+const app = async () => {
+  let connection;
 
-    try {
-        connection = await getDb();
+  try {
+    connection = await getDb();
 
-        console.log('Creando base de datos...');
+    console.log("Creando base de datos...");
 
-        await connection.query('CREATE DATABASE IF NOT EXISTS web');
-        await connection.query('USE web');
+    await connection.query("CREATE DATABASE IF NOT EXISTS worksoutgym");
+    await connection.query("USE worksoutgym");
 
-        console.log('Eliminando tablas existentes...');
+    console.log("Eliminando tablas existentes...");
 
-        await connection.query('DROP TABLE IF EXISTS users, workers, exercises');
+    await connection.query("DROP TABLE IF EXISTS users, workers, exercises");
 
-        console.log('Creando tablas...');
+    console.log("Creando tablas...");
 
-        // Tabla de usuarios.
-        await connection.query(
-            `
+    // Tabla de usuarios.
+    await connection.query(
+      `
                 CREATE TABLE users (
                     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                     email VARCHAR(100) NOT NULL UNIQUE,
@@ -35,11 +35,11 @@ const main = async () => {
                     
                 )
             `
-        );
+    );
 
-        // Tabla de trabajadores.
-        await connection.query(
-            `
+    // Tabla de trabajadores.
+    await connection.query(
+      `
                 CREATE TABLE workers (
                     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                     email VARCHAR(100) NOT NULL UNIQUE,
@@ -52,11 +52,11 @@ const main = async () => {
                     favoritesExcercises JSON,
                 )
             `
-        );
+    );
 
-        // Tabla de ejercicios.
-        await connection.query(
-            `
+    // Tabla de ejercicios.
+    await connection.query(
+      `
                 CREATE TABLE exercises (
                     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                     name VARCHAR(50),
@@ -65,16 +65,16 @@ const main = async () => {
                     muscleGroup VARCHAR(100)
                 )
             `
-        );
+    );
 
-        console.log('¡Tablas creadas!');
-    } catch (err) {
-        console.error(err);
-    } finally {
-        if (connection) connection.release();
-        process.exit();
-    }
+    console.log("¡Tablas creadas!");
+  } catch (err) {
+    console.error(err);
+  } finally {
+    if (connection) connection.release();
+    process.exit();
+  }
 };
 
 // Llamamos a la función anterior.
-main();
+app();
