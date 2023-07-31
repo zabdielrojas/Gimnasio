@@ -1,9 +1,9 @@
 // Importamos las dependencias necesarias.
-require('dotenv').config();
-const express = require('express');
-const fileUpload = require('express-fileupload');
-const morgan = require('morgan');
-const cors = require('cors');
+require("dotenv").config();
+const express = require("express");
+const fileUpload = require("express-fileupload");
+const morgan = require("morgan");
+const cors = require("cors");
 
 // Creamos el servidor.
 const app = express();
@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(fileUpload());
 
 // Middleware que muestra información sobre la petición entrante.
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 
 // Middleware que evita problemas con las CORS cuando intentamos conectar el cliente con
 // el servidor.
@@ -27,18 +27,18 @@ app.use(cors());
 app.use(express.static(process.env.UPLOADS_DIR));
 
 // Importamos las rutas.
-const workersRouter = require('./src/routes/workers');
-const usersRouter = require('./src/routes/users');
-const exercisesRouter = require('./src/routes/exercises');
+const workersRouter = require("./src/routes/workers");
+const usersRouter = require("./src/routes/users");
+const exercisesRouter = require("./src/routes/exercises");
 
 // Configuración de las rutas.
-app.use('/api/workers', workersRouter);
-app.use('/api/users', usersRouter);
-app.use('/api/exercises', exercisesRouter);
+app.use("/api/workers", workersRouter);
+app.use("/api/users", usersRouter);
+app.use("/api/exercises", exercisesRouter);
 
 // Middleware de error para rutas no encontradas.
 app.use((req, res, next) => {
-  const error = new Error('Not Found');
+  const error = new Error("Not Found");
   error.status = 404;
   next(error);
 });
