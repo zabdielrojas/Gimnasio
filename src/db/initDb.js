@@ -35,13 +35,14 @@ const app = async () => {
 
     // Creaundo usuario admin
 
-    const ADMIN_EMAIL = "admin@example.com";
-    const ADMIN_PWD = "contraseña_segura";
-    const adminRole = "admin";
+    const email = "admin@example.com";
+    const password = "contraseña_segura";
+    const userRole = "admin";
+    const name = "Nombre del administrador";
 
     await connection.query(
-      "INSERT INTO users (email, password, userRole) VALUES (?, ?, ?)",
-      [ADMIN_EMAIL, ADMIN_PWD, adminRole]
+      "INSERT INTO users (email, password, userRole, name) VALUES (?, ?, ?, ?)",
+      [email, password, userRole, name]
     );
 
     console.log("Usuario administrador creado con éxito");
