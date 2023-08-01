@@ -7,12 +7,15 @@ const app = async () => {
 
   try {
     connection = await getDb();
-    await connection.query(`USE ${process.env.MYSQL_DB}`);
+
+    console.log("NOMBRE DB:", process.env.MYSQL_DATABASE);
+
+    await connection.query(`USE ${process.env.MYSQL_DATABASE}`);
 
     // Borrar tablas si existen
-    await connection.query('DROP TABLE IF EXISTS users');
-    await connection.query('DROP TABLE IF EXISTS workers');
-    await connection.query('DROP TABLE IF EXISTS exercises');
+    await connection.query("DROP TABLE IF EXISTS users");
+    await connection.query("DROP TABLE IF EXISTS workers");
+    await connection.query("DROP TABLE IF EXISTS exercises");
 
     console.log("Creando tablas...");
 
