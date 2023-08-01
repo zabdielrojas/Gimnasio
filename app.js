@@ -27,14 +27,14 @@ app.use(cors());
 app.use(express.static(process.env.UPLOADS_DIR));
 
 // Importamos las rutas.
-const workersRouter = require("./src/routes/workers");
-const usersRouter = require("./src/routes/users");
-const exercisesRouter = require("./src/routes/exercises");
+//const workersRouter = require("./src/routes/workers");
+//const usersRouter = require("./src/routes/users");
+//const exercisesRouter = require("./src/routes/exercises");
 
 // Configuración de las rutas.
-app.use("/api/workers", workersRouter);
-app.use("/api/users", usersRouter);
-app.use("/api/exercises", exercisesRouter);
+//app.use("/api/workers", workersRouter);
+//app.use("/api/users", usersRouter);
+//app.use("/api/exercises", exercisesRouter);
 
 // Middleware de error para rutas no encontradas.
 app.use((req, res, next) => {
@@ -44,7 +44,7 @@ app.use((req, res, next) => {
 });
 
 // Middleware de error para otros errores.
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.json({
     error: {

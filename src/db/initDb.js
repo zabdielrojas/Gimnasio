@@ -29,31 +29,18 @@ const app = async () => {
           name VARCHAR(30) NOT NULL,
           lastName VARCHAR(100),
           birthDate DATETIME,
-          photo VARCHAR(100),
-          likes JSON,
-          favoritesExcercises JSON
+          photo VARCHAR(100)
+          role ENUM('admin', 'normal') DEFAULT 'normal',
+          CRATE_AT
         )
       `
     );
 
-    // Tabla de trabajadores.
-    await connection.query(
-      `
-        CREATE TABLE workers (
-          id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-          email VARCHAR(100) NOT NULL UNIQUE,
-          password VARCHAR(100) NOT NULL,
-          name VARCHAR(30) NOT NULL,
-          lastName VARCHAR(100),
-          birthDate DATETIME,
-          photo VARCHAR(100),
-          role ENUM('admin', 'normal') DEFAULT 'normal',
-          likes JSON,
-          favoritesExcercises JSON,
-          active BOOLEAN DEFAULT false
-        )
-      `
-    );
+    // Tabla de favoritos:
+    // id
+    // fk user
+    // fk ejercicios
+    // createat
 
     // Tabla de ejercicios.
     await connection.query(
@@ -63,10 +50,17 @@ const app = async () => {
           name VARCHAR(50),
           photo VARCHAR(100),
           description TEXT,
-          muscleGroup VARCHAR(100)
+          muscleGroup ENUM('superior', 'inferior')
+          FK usuario
+          CREATE_AT
         )
       `
     );
+
+    // Creo usuario admin (insert)
+    //ADMIN_EMAIL
+    //ADMIN_PWD
+    //rol admin
 
     console.log("¡Tablas creadas!");
   } catch (err) {
