@@ -27,12 +27,10 @@ app.use(cors());
 app.use(express.static(process.env.UPLOADS_DIR));
 
 // Importamos las rutas.
-//const workersRouter = require("./src/routes/workers");
 //const usersRouter = require("./src/routes/users");
 //const exercisesRouter = require("./src/routes/exercises");
 
 // Configuración de las rutas.
-//app.use("/api/workers", workersRouter);
 //app.use("/api/users", usersRouter);
 //app.use("/api/exercises", exercisesRouter);
 
