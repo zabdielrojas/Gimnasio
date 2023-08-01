@@ -28,10 +28,23 @@ const app = async () => {
         lastName VARCHAR(100),
         birthDate DATETIME,
         photo VARCHAR(100),
-        userRole ENUM('admin', 'normal') DEFAULT 'normal',
+        userRole ENUM('admin', 'cliente') DEFAULT 'cliente',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
+
+    // Creaundo usuario admin
+
+    const ADMIN_EMAIL = "admin@example.com";
+    const ADMIN_PWD = "contraseña_segura";
+    const adminRole = "admin";
+
+    await connection.query(
+      "INSERT INTO users (email, password, userRole) VALUES (?, ?, ?)",
+      [ADMIN_EMAIL, ADMIN_PWD, adminRole]
+    );
+
+    console.log("Usuario administrador creado con éxito");
 
     // Tabla de ejercicios.
     await connection.query(`
@@ -47,12 +60,58 @@ const app = async () => {
       )
     `);
 
-    // Creo usuario admin (insert)
-    // ADMIN_EMAIL
-    // ADMIN_PWD
-    // rol admin
-
     console.log("¡Tablas creadas!");
+
+    // Creando los ejercicios
+    const exercises = [
+      [
+        "sentadilla",
+        "consiste en flexionar las rodillas y bajar el cuerpo manteniendo la verticalidad, para luego regresar a una posición erguida.",
+        "inferior",
+      ],
+      [
+        "press de banca",
+        "Este ejercicio conlleva un movimiento de empuje con las piernas apoyadas en el suelo y la espalda y el tren superior sobre una superficie plana.",
+        "superior",
+      ],
+      [
+        "curl de bíceps",
+        "Ejercicio para fortalecer los músculos del bíceps",
+        "superior",
+      ],
+      [
+        "zancada",
+        "Ejercicio para fortalecer los músculos de las piernas y glúteos",
+        "inferior",
+      ],
+      [
+        "remo con barra",
+        "Ejercicio para fortalecer los músculos de la espalda y bíceps",
+        "superior",
+      ],
+      [
+        "elevación lateral de hombros",
+        "Ejercicio para fortalecer los músculos del hombro",
+        "superior",
+      ],
+      [
+        "abdominales",
+        "Ejercicio para fortalecer los músculos abdominales",
+        "superior",
+      ],
+    ];
+
+    const values = exercises
+      .map(
+        (exercise) => `('${exercise[0]}', '${exercise[1]}', '${exercise[2]}')`
+      )
+      .join(", ");
+
+    await connection.query(
+      `INSERT INTO exercises (name, description, muscleGroup) VALUES ${values}`
+    );
+
+    console.log("Ejercicios agregados con éxito");
   } catch (err) {
     console.error(err);
   } finally {
