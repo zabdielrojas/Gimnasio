@@ -8,8 +8,6 @@ const app = async () => {
   try {
     connection = await getDb();
 
-    console.log("NOMBRE DB:", process.env.MYSQL_DATABASE);
-
     await connection.query(`USE ${process.env.MYSQL_DATABASE}`);
 
     // Borrar tablas si existen
@@ -33,20 +31,6 @@ const app = async () => {
       )
     `);
 
-    // Creaundo usuario admin
-
-    const email = "admin@example.com";
-    const password = "contraseña_segura";
-    const userRole = "admin";
-    const name = "Nombre del administrador";
-
-    await connection.query(
-      "INSERT INTO users (email, password, userRole, name) VALUES (?, ?, ?, ?)",
-      [email, password, userRole, name]
-    );
-
-    console.log("Usuario administrador creado con éxito");
-
     // Tabla de ejercicios.
     await connection.query(`
       CREATE TABLE exercises (
@@ -61,7 +45,29 @@ const app = async () => {
       )
     `);
 
+    await connection.query(`
+    CREATE TABLE favorites (
+      id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+      user_id INT UNSIGNED,
+      exercise_id INT UNSIGNED,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES users(id),
+      FOREIGN KEY (exercise_id) REFERENCES exercises(id),
+      UNIQUE(user_id, exercise_id)
+    )
+  `);
+
     console.log("¡Tablas creadas!");
+
+    // Creando usuario admin
+    const { ADMIN_EMAIL, ADMIN_PWD } = process.env;
+
+    await connection.query(
+      "INSERT INTO users (email, password, userRole, name) VALUES (?, ?, ?, ?)",
+      [ADMIN_EMAIL, ADMIN_PWD, "admin", "Administrador"]
+    );
+
+    console.log("Usuario administrador creado con éxito");
 
     // Creando los ejercicios
     const exercises = [
