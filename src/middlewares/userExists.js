@@ -1,5 +1,5 @@
 // Importamos la función que nos permite obtener una conexión libre con la base de datos.
-const getDB = require("../db/getDb.js");
+const getDb = require("../db/getDb.js");
 
 // Importamos los errores.
 const { userAlreadyRegisteredError } = require("../services/errorService");
@@ -9,7 +9,7 @@ const userExists = async (req, res, next) => {
   let connection;
 
   try {
-    connection = await getDB();
+    connection = await getDb();
 
     const userId = req.user?.id || req.params.userId;
 

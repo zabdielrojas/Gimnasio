@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const getDb = require("./getDb");
 
-const app = async () => {
+async function app() {
   let connection;
 
   try {
@@ -74,6 +74,6 @@ const app = async () => {
     if (connection) connection.release();
     process.exit();
   }
-};
+}
 
 app();
