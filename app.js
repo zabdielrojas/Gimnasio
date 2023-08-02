@@ -56,3 +56,9 @@ const port = process.env.PORT || 8000;
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
+
+
+//ruta para obtener los ejercicios favoritos del usuario:
+
+app.get('/favoritos', ejercicioController.obtenerEjerciciosFavoritos); 
+
