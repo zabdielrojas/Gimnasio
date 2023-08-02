@@ -2,7 +2,7 @@
 const bcrypt = require('bcrypt');
 
 // Importamos la función que nos permite obtener una conexión libre con la base de datos.
-const getDB = require('../../db/getDB');
+const getDB = require('./db/getDB');
 
 // Importamos los errores.
 const {

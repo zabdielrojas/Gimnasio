@@ -3,7 +3,7 @@
 // Importamos las dependencias.
 const bcrypt = require('bcrypt');
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../../db/getDB');
+const { sequelize } = require('./db/getDB');
 
 // Definición del modelo de usuario.
 const User = sequelize.define('User', {

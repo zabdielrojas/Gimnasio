@@ -84,8 +84,12 @@ npm mysql2 dotenv
 ### **Endpoints de Usuarios**
 
 - **POST** - [/users/register] - Crea un nuevo usuario pidiendo todos los datos incluida la foto (body formData). Amalia
+🟠 Falta probar postman y revisar las rutas
 - **POST** - [/users/login] - Logea a un usuario retornando un token, email, avatar y rol. Amalia
+🟠 Falta probar postman y revisar las rutas
 - **GET** - [/users] - devuelve los datos del usuario del token (token) Amalia
+🟠 Falta probar postman y revisar las rutas
+
 
 ### **Endpoints ejercicios**
 

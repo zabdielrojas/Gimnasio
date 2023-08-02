@@ -1,9 +1,13 @@
 // models/index.js
 
-// Importa tu modelo de usuario (insertUserModel).
+//  modelo de usuario (User).
 const User = require('./user');
 
+// función insertUserModel.
+const insertUserModel = require('./insertUsermodel'); // 
+
 module.exports = {
-  User, 
-  // Agrega otros modelos aquí si los tienes definidos.
+  User,
+  insertUserModel,
+  // Agregar otros modelos aquí cuando los tengais definidos. 🔴
 };

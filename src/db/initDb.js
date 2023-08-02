@@ -11,6 +11,7 @@ async function app() {
     await connection.query(`USE ${process.env.MYSQL_DATABASE}`);
 
     // Borrar tablas si existen
+    await connection.query("DROP TABLE IF EXISTS favorites");
     await connection.query("DROP TABLE IF EXISTS exercises");
     await connection.query("DROP TABLE IF EXISTS users");
 
