@@ -121,44 +121,46 @@ const app = async () => {
   }
 };
 
-const insertTrainings = async (trainings) => {
-  let connection;
+app();
 
-  try {
-    connection = await getDb();
-
-    await connection.query(`USE ${process.env.MYSQL_DATABASE}`);
-
-    // Recorrer el array de entrenamientos
-    for (let training of trainings) {
-      const [name, description, muscleGroup] = training;
-
-      // Insertar el entrenamiento en la tabla de ejercicios
-      await connection.query(
-        "INSERT INTO exercises (name, description, muscleGroup) VALUES (?, ?, ?)",
-        [name, description, muscleGroup]
-      );
-    }
-
-    console.log("Entrenamientos insertados con éxito");
-  } catch (err) {
-    console.error(err);
-  } finally {
-    if (connection) connection.release();
-    process.exit();
-  }
-};
-//Finalmente, puedes llamar a esta función pasándole el array de entrenamientos que quieres insertar:
-const trainings = [
-  ["sentadilla", "consiste en flexionar las rodillas y bajar el cuerpo manteniendo la verticalidad, para luego regresar a una posición erguida. 1", "inferior"],
-  ["press de banca", "Este ejercicio conlleva un movimiento de empuje con las piernas apoyadas en el suelo y la espalda y el tren superior sobre una superficie planao 2", "superior"],
-  ["curl de bíceps", "Ejercicio para fortalecer los músculos del bíceps","superior 3", ],
-  [ "zancada", "Ejercicio para fortalecer los músculos de las piernas y glúteos 4","inferior", ],
-  [ "remo con barra", "Ejercicio para fortalecer los músculos de la espalda y bíceps 5", "superior",],
-  ["elevación lateral de hombros", "Ejercicio para fortalecer los músculos del hombro 6", "superior",],
-  [ "abdominales", "Ejercicio para fortalecer los músculos abdominales 7", "superior",],
-  // Agrega más entrenamientos aquí si es necesario
-];
-
-insertTrainings(trainings);
-
+//const insertTrainings = async (trainings) => {
+//  let connection;
+//
+//  try {
+//    connection = await getDb();
+//
+//    await connection.query(`USE ${process.env.MYSQL_DATABASE}`);
+//
+//    // Recorrer el array de entrenamientos
+//    for (let training of trainings) {
+//      const [name, description, muscleGroup] = training;
+//
+//      // Insertar el entrenamiento en la tabla de ejercicios
+//      await connection.query(
+//        "INSERT INTO exercises (name, description, muscleGroup) VALUES (?, ?, ?)",
+//        [name, description, muscleGroup]
+//      );
+//    }
+//
+//    console.log("Entrenamientos insertados con éxito");
+//  } catch (err) {
+//    console.error(err);
+//  } finally {
+//    if (connection) connection.release();
+//    process.exit();
+//  }
+//};
+////Finalmente, puedes llamar a esta función pasándole el array de entrenamientos que quieres insertar:
+//const trainings = [
+//  ["sentadilla", "consiste en flexionar las rodillas y bajar el cuerpo manteniendo la verticalidad, para luego regresar a una posición erguida. 1", "inferior"],
+//  ["press de banca", "Este ejercicio conlleva un movimiento de empuje con las piernas apoyadas en el suelo y la espalda y el tren superior sobre una superficie planao 2", "superior"],
+//  ["curl de bíceps", "Ejercicio para fortalecer los músculos del bíceps","superior 3", ],
+//  [ "zancada", "Ejercicio para fortalecer los músculos de las piernas y glúteos 4","inferior", ],
+//  [ "remo con barra", "Ejercicio para fortalecer los músculos de la espalda y bíceps 5", "superior",],
+//  ["elevación lateral de hombros", "Ejercicio para fortalecer los músculos del hombro 6", "superior",],
+//  [ "abdominales", "Ejercicio para fortalecer los músculos abdominales 7", "superior",],
+//  // Agrega más entrenamientos aquí si es necesario
+//];
+//
+//insertTrainings(trainings);
+//
