@@ -8,7 +8,7 @@ const uuid = require("uuid");
 const { saveFileError } = require("./errorService");
 const UPLOADS_DIR = path.join(__dirname, "./uploads");
 
-const savePhotoService = async (img, width) => {
+const saveExerciseService = async (exercises, width) => {
   try {
     // Ruta absoluta al directorio de subida de archivos.
     const uploadsPath = path.join(__dirname, UPLOADS_DIR);
@@ -21,8 +21,8 @@ const savePhotoService = async (img, width) => {
       await fs.mkdir(uploadsPath);
     }
 
-    // Creamos un objeto de tipo Sharp con la imagen dada.
-    const sharpImg = sharp(img.data);
+    // Creamos un objeto de tipo Sharp con la ejercicio data.
+    const sharpImg = sharp(exercises.data);
 
     // Redimensionamos la imagen. Width representa un tamaño en píxeles.
     sharpImg.resize(width);
@@ -45,4 +45,4 @@ const savePhotoService = async (img, width) => {
   }
 };
 
-module.exports = savePhotoService;
+module.exports = saveExerciseService;
