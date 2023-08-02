@@ -83,22 +83,23 @@ npm mysql2 dotenv
 
 ### **Endpoints de Usuarios**
 
-- **POST** - [/users/register] - Crea un nuevo usuario pidiendo todos los datos incluida la foto (body formData).
-- **POST** - [/users/login] - Logea a un usuario retornando un token, email, avatar y rol.
-- **GET** - [/users] - devuelve los datos del usuario del token (token)
+- **POST** - [/users/register] - Crea un nuevo usuario pidiendo todos los datos incluida la foto (body formData). Amalia
+- **POST** - [/users/login] - Logea a un usuario retornando un token, email, avatar y rol. Amalia
+- **GET** - [/users] - devuelve los datos del usuario del token (token) Amalia
 
 ### **Endpoints ejercicios**
 
-- **POST** - [/exercises/] - Permite al administrador subir un ejercicio con foto (body formData). (TOKEN y rol admin)
-- **DELETE** - [/exercises/:exerciseId] - Permite eliminar un ejercicio (TOKEN y rol admin)
+- **POST** - [/exercises/] - Permite al administrador subir un ejercicio con foto (body formData). (TOKEN y rol admin) Susana
+- **DELETE** - [/exercises/:exerciseId] - Permite eliminar un ejercicio (TOKEN y rol admin) Susana
 - **GET** - [/exercises] - Retornar el listado de ejercicios (info si tengo un ejercicio en favorito). (TOKEN)
-  /ejercicies (todo los ejercicios)
+  /ejercicies (todo los ejercicios) Ariana
   Query params:
   /ejercicies?grupo=superior (todos los ejercicios del grupo especificado)
   /ejercicies?grupo=superior&favorites=no
   /ejercicies?favorites=no
-- **GET** - [/exercises/favorite] - Retornar el listado del los ejercicios favoritos del usuario de token (TOKEN)
-- **POST** - [/exercises/:exerciseId/favorite] - Permite a un usuario dar o quitar de favoritos a un ejercicio (tenerlo o no en preferidos). (TOKEN)
+
+- **GET** - [/exercises/favorite] - Retornar el listado del los ejercicios favoritos del usuario de token (TOKEN) Zabdiel
+- **POST** - [/exercises/:exerciseId/favorite] - Permite a un usuario dar o quitar de favoritos a un ejercicio (tenerlo o no en preferidos). (TOKEN) Zabdiel
 - **GET** - [/exercises/:exerciseId] - Retornar información de un ejercicio (incluida la description).
 
 CORS
