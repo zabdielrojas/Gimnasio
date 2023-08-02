@@ -1,12 +1,14 @@
-// Importamos las dependencias.
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+// loginUserController.js
+
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { User } = require('../models'); // Asegúrate de importar el modelo User.
 
 const {
   missingFieldsError,
   invalidCredentialsError,
   pendingActivationError,
-} = require("../services/errorService");
+} = require('../services/errorService');
 
 // Función controladora que logea a un usuario retornando un token.
 const loginUser = async (req, res, next) => {
@@ -17,10 +19,9 @@ const loginUser = async (req, res, next) => {
       // Si faltan campos requeridos, lanzamos un error.
       missingFieldsError();
     }
-    // ❌HAY QUE CREAR 1 MODELO DE PRUEBA❌
-    //Aqui va otro modelo este es un ejemplo
+
     // Buscamos al usuario por su email en la base de datos.
-    const user = await loginUser(email);
+    const user = await User.findOne({ where: { email } });
 
     if (!user) {
       // Si el usuario no existe, lanzamos un error.
@@ -48,11 +49,11 @@ const loginUser = async (req, res, next) => {
 
     // Creamos el token.
     const token = jwt.sign(tokenInfo, process.env.SECRET, {
-      expiresIn: "7d",
+      expiresIn: '7d',
     });
 
     res.send({
-      status: "ok",
+      status: 'ok',
       data: {
         token,
       },
