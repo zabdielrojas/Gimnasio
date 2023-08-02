@@ -81,7 +81,7 @@ const PORT = 3000;
 app.use(bodyParser.json());
 
 // Lista para almacenar los ejercicios en memoria
-let ejercicios = [
+let exercises = [
   { id: 1, nombre: 'Ejercicio 1', descripcion: 'Descripción del ejercicio 1', musclegroup: 'Grupo muscular 1' },
   { id: 2, nombre: 'Ejercicio 2', descripcion: 'Descripción del ejercicio 2', musclegroup: 'Grupo muscular 2' },
   { id: 3, nombre: 'Ejercicio 3', descripcion: 'Descripción del ejercicio 3', musclegroup: 'Grupo muscular 3' }
@@ -91,24 +91,24 @@ let ejercicios = [
 let likes = {};
 
 // Ruta para obtener todos los ejercicios
-app.get('/ejercicios', (req, res) => {
+app.get('/exercises', (req, res) => {
   res.json(ejercicios);
 });
 
 // Ruta para agregar un ejercicio
-app.post('/ejercicios', (req, res) => {
+app.post('/exercises', (req, res) => {
   const { id, nombre, descripcion } = req.body;
   if (!id || !nombre || !descripcion) {
     return res.status(400).json({ mensaje: 'Se deben proporcionar todos los campos: id, nombre, descripcion' });
   }
 
   const nuevoEjercicio = { id, nombre, descripcion };
-  ejercicios.push(nuevoEjercicio);
+  exercises.push(nuevoEjercicio);
   res.json({ mensaje: 'Ejercicio agregado correctamente' });
 });
 
 // Ruta para dar un like a un ejercicio específico
-app.post('/ejercicios/:id/like', (req, res) => {
+app.post('/exercises/:id/like', (req, res) => {
   const ejercicioId = parseInt(req.params.id);
 
   if (isNaN(ejercicioId)) {
@@ -128,14 +128,14 @@ app.post('/ejercicios/:id/like', (req, res) => {
 });
 
 // Ruta para quitar un like de un ejercicio específico
-app.delete('/ejercicios/:id/like', (req, res) => {
+app.delete('/exercises/:id/like', (req, res) => {
   const ejercicioId = parseInt(req.params.id);
 
   if (isNaN(ejercicioId)) {
     return res.status(400).json({ mensaje: 'El id del ejercicio debe ser un número válido' });
   }
 
-  if (!ejercicios.find(ejercicio => ejercicio.id === ejercicioId)) {
+  if (!exercises.find(ejercicio => ejercicio.id === ejercicioId)) {
     return res.status(404).json({ mensaje: 'No se encontró el ejercicio con el id proporcionado' });
   }
 
@@ -151,3 +151,42 @@ app.listen(PORT, () => {
 });
 
 
+//Retornar información de un ejercicio (incluida la description).
+
+const getAllExercises = (req, res) => {
+  const id = parseInt(req.params.id);
+  const exercises = exercises.find((e) => e.id === id);
+  if (!exercises) return res.sendStatus(404);
+  res.json(exercises);
+};
+
+//Retornar el listado del los ejercicios favoritos del usuario de token (TOKEN)
+
+let ejercicios = [
+  {
+    id: 1,
+    nombre: 'Ejercicio 1',
+    descripcion: 'Descripción del ejercicio 1',
+    foto: 'url_de_la_imagen',
+    tipologia: 'Fuerza',
+    grupoMuscular: 'Grupo muscular 1',
+    likes: 0,
+    favoritos: [] // Agregamos un array para almacenar los usuarios que lo han marcado como favorito
+  },
+  // Añade más ejercicios aquí
+];
+
+const obtenerEjerciciosFavoritos = (req, res) => {
+  const userId = req.user.id;
+
+  const ejerciciosFavoritos = ejercicios.filter(ejercicio => ejercicio.favoritos.includes(userId));
+  
+  res.json(ejerciciosFavoritos);
+};
+
+module.exports = {
+  // ...
+  seleccionarFavorito,
+  filtrarEjercicios,
+  obtenerEjerciciosFavoritos, // Agregamos esta función
+};
