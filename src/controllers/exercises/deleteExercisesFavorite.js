@@ -3,15 +3,15 @@ require("dotenv").config();
 // Importamos la función que nos permite obtener una conexión libre con la base de datos.
 const getDb = require("./getDb");
 
-async function addToFavorites(userId, exerciseId) {
+async function removeFromFavorites(userId, exerciseId) {
   let connection;
   try {
-    const connection = await getDb();
+    connection = await getDb();
     await connection.query(
-      "INSERT INTO favorites (user_id, exercise_id) VALUES (?, ?)",
+      "DELETE FROM favorites WHERE user_id = ? AND exercise_id = ?",
       [userId, exerciseId]
     );
-    console.log("Ejercicio añadido a favoritos!");
+    console.log("Ejercicio eliminado de favoritos!");
   } catch (err) {
     console.error(err);
   } finally {
@@ -19,6 +19,4 @@ async function addToFavorites(userId, exerciseId) {
   }
 }
 
-module.exports = addToFavorites;
-
-getDb();
+module.exports = removeFromFavorites;

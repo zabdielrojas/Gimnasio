@@ -2,6 +2,23 @@ require("dotenv").config();
 
 const getDb = require("./getDb");
 
+// Función que retorna el listado de todos los ejercicios.
+
+async function getAllExercises() {
+  let connection;
+  try {
+    connection = await getDb();
+    const [results] = await connection.query("SELECT * FROM exercises");
+    return results;
+  } catch (err) {
+    console.error(err);
+  } finally {
+    if (connection) connection.release();
+  }
+}
+
+// Función que retorna los ejercicios por su Id.
+
 async function getExerciseById(exercise_id) {
   let connection;
   try {
@@ -17,6 +34,8 @@ async function getExerciseById(exercise_id) {
     if (connection) connection.release();
   }
 }
+
+// Función que retorna los ejercicios por su nombre.
 
 async function getExerciseByName(name) {
   let connection;
@@ -34,6 +53,8 @@ async function getExerciseByName(name) {
   }
 }
 
+// Función que retorna los ejercicios que un usuario a seleccionado en favoritos.
+
 async function getFavoriteExercises(user_id) {
   let connection;
   try {
@@ -49,6 +70,9 @@ async function getFavoriteExercises(user_id) {
     if (connection) connection.release();
   }
 }
+
+// Función que retorna los ejercicios por el grupo muscular.
+
 async function getExercisesByMuscleGroup(muscleGroup) {
   let connection;
   try {
@@ -66,6 +90,7 @@ async function getExercisesByMuscleGroup(muscleGroup) {
 }
 
 module.exports = {
+  getAllExercises,
   getExerciseById,
   getExerciseByName,
   getFavoriteExercises,

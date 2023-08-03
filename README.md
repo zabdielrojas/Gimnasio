@@ -36,18 +36,6 @@ Terminado 🟢
 
 ● BASES DE DATOS
 
-### Trabajadores (Administrador)
-
-| Campo     | Tipo         | Descripción                       |
-| --------- | ------------ | --------------------------------- |
-| Id        | TINYINT(50)  | Identificador único del usuario   |
-| Email     | VARCHAR(100) | Correo electrónico del usuario    |
-| firstName | VARCHAR(50)  | Nombre del usuario                |
-| lastName  | VARCHAR(100) | Apellidos del usuario             |
-| birthDate | DATETIME     | Fecha de nacimiento del usuario   |
-| photo     | CHAR(40)     | Foto usuario                      |
-| admin     | TINYINT      | Rol del usuario ("Administrador") |
-
 ### Ejercicios
 
 | Campo       | Tipo         | Descripción                             |
@@ -55,24 +43,34 @@ Terminado 🟢
 | Id          | TINYINT(50)  | Identificador único del ejercicio       |
 | Name        | VARCHAR(50)  | Nombre del ejercicio que realiza        |
 | photo       | VARCHAR(100) | Que describa él ejercicio               |
-|             |
 | musclegroup | VARCHAR(100) | Grupo muscular que trabaja el ejercicio |
 | description | TEXT         | Descripción de ejercicio                |
 
-### Usuarios (Cliente)
+### Ejercicios favoritos
 
-| Campo     | Tipo         | Descripción                                              |
-| --------- | ------------ | -------------------------------------------------------- |
-| id        | TINYINT(50)  | Identificador único del usuario                          |
-| email     | VARCHAR(100) | Correo electrónico del usuario                           |
-| Name      | VARCHAR(50)  | Nombre del usuario                                       |
-| lastName  | VARCHAR(100) | Apellidos del usuario                                    |
-| birthDate | DATETIME     | Fecha de nacimiento del usuario                          |
-| photo     | CHAR(100)    | foto de usuario                                          |
-| role      | ENUM         | Rol del usuario ("Cliente")                              |
-| Listar    | VARCHAR(100) | Ver listado y detalle de los ejercicios                  |
-| select    | VARCHAR(100) | Seleccionar ejercicios para ponerlos entre los favoritos |
-| like      | VARCHAR(100) | Podrá poner o quitar un like a un ejercicio              |
+| Campo       | Tipo        | Descripción                       |
+| ----------- | ----------- | --------------------------------- |
+| Id          | TINYINT(50) | Identificador único del ejercicio |
+| user_id     | FOREIGN KEY | Id del usuario                    |
+| exercise_id | FOREIGN KEY | Id del ejercicio                  |
+
+### Usuarios
+
+| Campo | Tipo         | Descripción                     |
+| ----- | ------------ | ------------------------------- |
+| id    | TINYINT(50)  | Identificador único del usuario |
+| email | VARCHAR(100) | Correo electrónico del usuario  |
+
+| password | VARCHAR(100) | contraseña del usuario |
+
+| Name | VARCHAR(50) | Nombre del usuario |
+| lastName | VARCHAR(100) | Apellidos del usuario |
+| birthDate | DATETIME | Fecha de nacimiento del usuario |
+| photo | VARCHAR(100) | foto de usuario |
+| role | ENUM | Rol del usuario ("Cliente") |
+| Listar | VARCHAR(100) | Ver listado y detalle de los ejercicios |
+| select | VARCHAR(100) | Seleccionar ejercicios para ponerlos entre los favoritos |
+| like | VARCHAR(100) | Podrá poner o quitar un like a un ejercicio |
 
 ● EXTENSIONES NPM USADAS
 
@@ -86,6 +84,7 @@ npm cors
 
 - **POST** - [/users/register] - Crea un nuevo usuario pidiendo todos los datos incluida la foto (body formData).
   🟠 Falta probar postman y revisar las rutas
+
 - **POST** - [/users/login] - Logea a un usuario retornando un token, email, avatar y rol.
   🟠 Falta probar postman y revisar las rutas
 - **GET** - [/users] - devuelve los datos del usuario del token (token)
@@ -93,18 +92,23 @@ npm cors
 
 ### **Endpoints ejercicios**
 
-- **POST** - [/exercises/] - Permite al administrador subir un ejercicio con foto (body formData). (TOKEN y rol admin)
-- **DELETE** - [/exercises/:exerciseId] - Permite eliminar un ejercicio (TOKEN y rol admin)
-- **GET** - [/exercises] - Retornar el listado de ejercicios (info si tengo un ejercicio en favorito). (TOKEN)
-  /ejercicies (todo los ejercicios)
-  Query params:
-  /ejercicies?grupo=superior (todos los ejercicios del grupo especificado)
-  /ejercicies?grupo=superior&favorites=no
-  /ejercicies?favorites=no
+- **POST** - [/exercises/addNewExercise] - Permite al administrador subir un ejercicio con foto (body formData). (TOKEN y rol admin)
+  🟠 Falta probar postman y revisar las rutas
+
+- **DELETE** - [/exercises/:exerciseId/deleteExercise] - Permite al administrador eliminar un ejercicio (TOKEN y rol admin)
+  🟠 Falta probar postman y revisar las rutas
+
+- **GET** - [/exercises/filterExercises/:getAllExercises, :getExerciseById, :getExerciseByName, :getFavoriteExercises, :getExercisesByMuscleGroup] - Permite buscar ejercicios por diferentes métodos de filtrado o mostralos todos. (TOKEN)
+  🟠 Falta probar postman y revisar las rutas
 
 - **GET** - [/exercises/favorite] - Retornar el listado del los ejercicios favoritos del usuario de token (TOKEN)
-- **POST** - [/exercises/:exerciseId/favorite] - Permite a un usuario dar o quitar de favoritos a un ejercicio (tenerlo o no en preferidos). (TOKEN)
-- **GET** - [/exercises/:exerciseId] - Retornar información de un ejercicio (incluida la description).
+  🟠 Falta probar postman y revisar las rutas
+
+- **POST** - [/exercises/:exerciseId/addToFavorites,removeFromFavorites] - Permite a un usuario dar o quitar de favoritos a un ejercicio (tenerlo o no en preferidos). (TOKEN)
+  🟠 Falta probar postman y revisar las rutas
+
+- **GET** - [/exercises/getExerciseInfo] - Retornar información de un ejercicio (incluida la description).
+  🟠 Falta probar postman y revisar las rutas
 
 CORS
 directorio uploads/fotos como static <img src="http://localhost:8000/43t4345tg3456g65.jpg">

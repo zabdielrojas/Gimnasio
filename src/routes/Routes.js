@@ -25,10 +25,15 @@ const {
   getFavoriteExercises,
   getExercisesByMuscleGroup,
   getExerciseInfo,
+  removeFromFavorites,
+  getAllExercises,
 } = require("src/controllers/exercises");
 
 // ruta para que un usuario agregue un ejercicio a favoritos en la base de datos.
 router.get("..addExercisesFavorite.js", addToFavorites);
+
+// ruta para que un usuario agregue un ejercicio a favoritos en la base de datos.
+router.get("..deleteExercisesFavorite.js", removeFromFavorites);
 
 // ruta para que el administrador agregue un ejercicio a la base de datos.
 
@@ -42,6 +47,7 @@ router.delete("..deleteExercises.js", deleteExercise);
 
 router.get(
   "..filterExercises.js",
+  getAllExercises,
   getExerciseById,
   getExerciseByName,
   getFavoriteExercises,
