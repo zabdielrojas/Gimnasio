@@ -28,7 +28,7 @@ const {
 } = require("src/controllers/exercises");
 
 // ruta para que un usuario agregue un ejercicio a favoritos en la base de datos.
-router.post("..addExercisesFavorite.js", addToFavorites);
+router.get("..addExercisesFavorite.js", addToFavorites);
 
 // ruta para que el administrador agregue un ejercicio a la base de datos.
 
