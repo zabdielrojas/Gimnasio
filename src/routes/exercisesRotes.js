@@ -22,3 +22,13 @@ router.get("/filter", filterExercises);
 // Ruta para borrar un entrenamiento
 
 module.exports = router;
+
+// Importamos las rutas.
+//const exerciseController = require("./controllers/exercises/exercisesController");
+//const userController = require("./userController");
+
+// Configuración de las rutas.
+// app.get('/exercises', exerciseController.getAllExercises);
+// app.get('/exercises/:exerciseId', exerciseController.getExerciseById);
+// app.post('/exercises/:id/like', exerciseController.seleccionarFavorito);
+// app.get('/favoritos', userController.obtenerEjerciciosFavoritos);

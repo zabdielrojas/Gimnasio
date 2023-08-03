@@ -4,9 +4,9 @@ require("dotenv").config();
 const getDb = require("./getDb");
 
 // Importamos los modelos
-const deleteExerciseModel = require("");
+const deleteExerciseModel = require("..deleteExercisesModel.js");
 
-// Función controladora que elimina un ejercicio.
+// Función controladora que elimina un ejercicio desde el administrador.
 const deleteExercise = async (req, res, next) => {
   try {
     const { id } = req.body;

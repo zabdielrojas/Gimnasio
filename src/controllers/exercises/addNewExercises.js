@@ -1,9 +1,11 @@
-// Faltan las rutas
+require("dotenv").config();
 
+// Importamos la función que nos permite obtener una conexión libre con la base de datos.
+const getDb = require("./getDb");
 // Importamos los modelos
-const insertExerciseModel = require("");
+const insertExerciseModel = require("..addExercisesModel.js");
 
-// Función controladora  que crea un nuevo ejercicio.
+// Función controladora  que crea un nuevo ejercicio desde administrador.
 const addNewExercise = async (req, res, next) => {
   try {
     const { name, photo, description, muscleGroup } = req.body;
@@ -24,4 +26,6 @@ const addNewExercise = async (req, res, next) => {
     next(err);
   }
 };
+
 module.exports = addNewExercise;
+getDb();
