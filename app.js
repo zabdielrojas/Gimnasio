@@ -26,33 +26,6 @@ app.use(cors());
 // Middleware que indica al servidor cuál es el directorio de ficheros estáticos.
 app.use(express.static(process.env.UPLOADS_DIR));
 
-// Importamos las rutas.
-//const exerciseController = require("./controllers/exercises/exercisesController");
-//const userController = require("./userController");
-
-// Configuración de las rutas.
-// app.get('/exercises', exerciseController.getAllExercises);
-// app.get('/exercises/:exerciseId', exerciseController.getExerciseById);
-// app.post('/exercises/:id/like', exerciseController.seleccionarFavorito);
-// app.get('/favoritos', userController.obtenerEjerciciosFavoritos);
-
-// Middleware de error para rutas no encontradas.
-app.use((req, res, next) => {
-  const error = new Error("Not Found");
-  error.status = 404;
-  next(error);
-});
-
-// Middleware de error para otros errores.
-app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  res.json({
-    error: {
-      message: err.message,
-    },
-  });
-});
-
 // Ponemos el servidor a escuchar peticiones en un puerto dado.
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
