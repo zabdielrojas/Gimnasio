@@ -23,6 +23,14 @@ exports.getAllExercises = async (req, res, next) => {
         musclegroup: "Grupo muscular 2",
         // ...
       },
+      {
+        id: 3,
+        name: "Ejercicio 3",
+        description: "Descripción del ejercicio 3",
+        musclegroup: "Grupo muscular 3",
+        // ...
+      },
+
       // ... Puedes agregar más ejercicios aquí
     ];
 
@@ -62,6 +70,3 @@ exports.getExerciseById = async (req, res, next) => {
 };
 
 // Agrega más funciones controladoras según las necesidades de tu API
-//-----------------------------------
-
-// errores

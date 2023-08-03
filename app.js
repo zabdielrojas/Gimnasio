@@ -27,12 +27,14 @@ app.use(cors());
 app.use(express.static(process.env.UPLOADS_DIR));
 
 // Importamos las rutas.
-//const usersRouter = require("./src/routes/usersRoutes");
-//const exercisesRouter = require("./src/routes/exercises");
+//const exerciseController = require("./controllers/exercises/exercisesController");
+//const userController = require("./userController");
 
 // Configuración de las rutas.
-//app.use("/api/users", usersRouter);
-//app.use("/api/exercises", exercisesRouter);
+// app.get('/exercises', exerciseController.getAllExercises);
+// app.get('/exercises/:exerciseId', exerciseController.getExerciseById);
+// app.post('/exercises/:id/like', exerciseController.seleccionarFavorito);
+// app.get('/favoritos', userController.obtenerEjerciciosFavoritos);
 
 // Middleware de error para rutas no encontradas.
 app.use((req, res, next) => {
@@ -56,9 +58,3 @@ const port = process.env.PORT || 8000;
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
-
-
-//ruta para obtener los ejercicios favoritos del usuario:
-
-app.get('/favoritos', ejercicioController.obtenerEjerciciosFavoritos); 
-
