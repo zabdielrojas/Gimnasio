@@ -3,7 +3,7 @@ require("dotenv").config();
 // Importamos la función que nos permite obtener una conexión libre con la base de datos.
 const getDb = require("./getDb");
 
-async function main() {
+async function addExercisesModel() {
   // Creando los ejercicios
   const exercises = [
     [
@@ -60,4 +60,4 @@ async function main() {
   console.log("Ejercicios agregados con éxito");
 }
 
-main();
+module.exports = addExercisesModel;

@@ -84,11 +84,11 @@ npm cors
 
 ### **Endpoints de Usuarios**
 
-- **POST** - [/users/register] - Crea un nuevo usuario pidiendo todos los datos incluida la foto (body formData). Amalia
+- **POST** - [/users/register] - Crea un nuevo usuario pidiendo todos los datos incluida la foto (body formData).
   🟠 Falta probar postman y revisar las rutas
-- **POST** - [/users/login] - Logea a un usuario retornando un token, email, avatar y rol. Amalia
+- **POST** - [/users/login] - Logea a un usuario retornando un token, email, avatar y rol.
   🟠 Falta probar postman y revisar las rutas
-- **GET** - [/users] - devuelve los datos del usuario del token (token) Amalia
+- **GET** - [/users] - devuelve los datos del usuario del token (token)
   🟠 Falta probar postman y revisar las rutas
 
 ### **Endpoints ejercicios**
