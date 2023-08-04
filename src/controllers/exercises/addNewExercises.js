@@ -6,6 +6,7 @@ const savePhotoService = require("../../services/savePhotoService");
 // Importamos los modelos
 //const insertExerciseModel = require("..addExercisesModel.js");
 const insertExerciseModel = require("../../models/exercises/addExercisesModel");
+const { missingFieldsError } = require("../../services/errorService");
 
 // Función controladora  que crea un nuevo ejercicio desde administrador.
 const addNewExercise = async (req, res, next) => {
@@ -19,8 +20,9 @@ const addNewExercise = async (req, res, next) => {
     }
 
     // comprobar que tenemos los campos obligatorios
-    //if(!name || !photoName || !description || !muscleGroup){
-    //}
+    if(!name || !photoName || !description || !muscleGroup){
+      missingFieldsError();
+    }
 
     // Registramos el entrenamiento.
 

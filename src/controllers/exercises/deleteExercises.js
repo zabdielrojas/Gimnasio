@@ -5,18 +5,29 @@ const getDb = require("./getDb");
 
 // Importamos los modelos
 const deleteExerciseModel = require("..deleteExercisesModel.js");
+const { missingFieldsError } = require("../../services/errorService");
 
+
+const getExerciseByIdModel = require ("../../models/exercises/deleteExerciseModel")
 // Función controladora que elimina un ejercicio desde el administrador.
 const deleteExercise = async (req, res, next) => {
   try {
-    const { id } = req.body;
-
-    // Eliminamos el ejercicio.
+    // Check if the user is an administrator
+    if (!req.user || !req.user.isAdmin) {
+      throw new Error("Solo el administrador puede borrar un ejercicio");
+    }
+    const { id } = req.params;
+    // Check if the exercise exists
+    const exercise = await getExerciseByIdModel(id);
+    if (!exercise) {
+      missingFieldsError();
+      
+    }
+    // Delete the exercise
     await deleteExerciseModel(id);
-
-    res.send({
+    res.status(200).send({
       status: "ok",
-      message: "Ejercicio eliminado",
+      message: "Ejercicio borrado.",
     });
   } catch (err) {
     next(err);
@@ -25,3 +36,6 @@ const deleteExercise = async (req, res, next) => {
 module.exports = deleteExercise;
 
 getDb();
+
+
+
