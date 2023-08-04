@@ -1,12 +1,12 @@
-# Proyecto02
+# Proyecto02 💪🏋️‍♀️
 
 Aplicación para organizar los entrenamientos en un gimnasio, tanto para los usuarios como para los trabajadores.
 
-## Descripción
+## Descripción 📝
 
 Implementar una API que permita publicar ejercicios para la gestión de los mismos en un gimnasio.
 
-## Usuarios Cliente
+## Usuarios Cliente 👥
 
 Pueden registrarse o hacer login en la aplicación, explorar la lista de ejercicios disponibles y ver sus detalles como nombre, descripción o grupo muscular, también pueden marcar sus ejercicios como favoritos para verlos después o filtrar ejercicios según necesiten.
 
@@ -14,7 +14,7 @@ Pueden registrarse o hacer login en la aplicación, explorar la lista de ejercic
 - Podrán filtrarlos por algunas características (por ejemplo, tipología o grupo muscular).
 - Podrán poner o quitar un like a un ejercicio.
 
-## Administrador
+## Administrador 👤
 
 - Todas las funcionalidades de usuario cliente.
 - Será el único capaz de añadir un nuevo ejercicio con los siguientes detalles:
@@ -24,11 +24,11 @@ Pueden registrarse o hacer login en la aplicación, explorar la lista de ejercic
   - Tipología
   - Grupo muscular.
 
-## Opcional
+## Opcional 🌟
 
 - Los usuarios y trabajadores pueden seleccionar algunos ejercicios para ponerlos entre los favoritos, útil para poder organizar una clase de entrenamiento.
 
-### Bases de Datos
+### Bases de Datos 🗄️
 
 #### Favorites
 
@@ -64,7 +64,7 @@ Pueden registrarse o hacer login en la aplicación, explorar la lista de ejercic
 | select      | VARCHAR(100) | Seleccionar ejercicios para ponerlos entre los favoritos |
 | like        | VARCHAR(100) | Dar/quitar like a un ejercicio              |
 
-### Extensiones NPM Usadas
+### Extensiones NPM Usadas 📦
 
 #### DevDependencies
 
@@ -82,22 +82,28 @@ Pueden registrarse o hacer login en la aplicación, explorar la lista de ejercic
 - mysql2: ^3.5.2
 - prettier: ^1.1.0
 
-### CORS
+### CORS 🌐
 
 directorio uploads/fotos como static `<img src="http://localhost:8000/43t4345tg3456g65.jpg">`
 
-### Endpoints de Usuarios
+### Endpoints de Usuarios 🛣️
 
 - **POST** - [/users/register] - Crea un nuevo usuario pidiendo todos los datos incluida la foto (body formData). 
 - **POST** - [/users/login] - Logea a un usuario retornando un token, email, avatar y rol. 
-- **GET** - [/users] - Devuelve los datos del usuario del token (token) 
+- **GET** - [/users] - Devuelve los datos del usuario del token (token)
 
 
-### Endpoints ejercicios
+### Endpoints ejercicios 🏋️‍♂️
 
-- **POST** - [/exercises/] - Permite al administrador subir un ejercicio con foto (body formData). (TOKEN y rol admin) Susana
-- **DELETE** - [/exercises/:exerciseId] - Permite eliminar un ejercicio (TOKEN y rol admin) Susana
+- **POST** - [/exercises/] - Permite al administrador subir un ejercicio con foto (body formData). (TOKEN y rol admin) 
+- **DELETE** - [/exercises/:exerciseId] - Permite eliminar un ejercicio (TOKEN y rol admin) 
 - **GET** - [/exercises] - Retornar el listado de ejercicios (info si tengo un ejercicio en favorito). (TOKEN)
-  /ejercicies (todo los ejercicios) Ariana
+  /ejercicies (todo los ejercicios) 
   Query params:
   /ejercicies?grupo=superior (todos los ejercicios del grupo especificado)
+  /ejercicies?grupo=superior&favorites=no
+  /ejercicies?favorites=no
+
+- **GET** - [/exercises/favorite] - Retornar el listado del los ejercicios favoritos del usuario de token (TOKEN) 
+- **POST** - [/exercises/:exerciseId/favorite] - Permite a un usuario dar o quitar de favoritos a un ejercicio (tenerlo o no en preferidos). (TOKEN) 
+- **GET** - [/exercises/:exerciseId] - Retornar información de un ejercicio (incluida la descripción).
