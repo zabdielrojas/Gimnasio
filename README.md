@@ -1,42 +1,45 @@
 # Proyecto02
 
-Aplicación para organizar internamente los entrenamientos en un gimnasio.
+Aplicación para organizar los entrenamientos en un gimnasio, tanto para los usuarios como para los trabajadores.
 
-DESCRIPCIÓN
-Implementar una API que permita publicar ejercicios para la gestión de los mismos en un
-gimnasio. Los usuarios serán los trabajadores del gimnasio.
+## Descripción
 
-USUARIOS ANÓNIMOS
-Pueden ver la landing de la plataforma donde podrán registrarse o hacer login.
+Implementar una API que permita publicar ejercicios para la gestión de los mismos en un gimnasio.
 
-ADMINISTRADOR
-● Será el único a poder añadir un nuevo ejercicio:
-○ nombre
-○ descripción
-○ foto
-○ tipología
-○ grupo muscular
-○ ...
-● Puede modificar o eliminar un entrenamiento
+## Usuarios Cliente
 
-USUARIOS Y TRABAJADORES
+Pueden registrarse o hacer login en la aplicación, explorar la lista de ejercicios disponibles y ver sus detalles como nombre, descripción o grupo muscular, también pueden marcar sus ejercicios como favoritos para verlos después o filtrar ejercicios según necesiten.
 
-- Puede ver el listado del los ejercicios y entrar en el detalle de los mismos.
-- Podrá filtrarlos por algunas características (ej: tipología o grupo muscular).
-- Podrá poner o quitar un like a un ejercicio.
+- Pueden ver el listado de los ejercicios y entrar en el detalle de los mismos.
+- Podrán filtrarlos por algunas características (por ejemplo, tipología o grupo muscular).
+- Podrán poner o quitar un like a un ejercicio.
 
-OPCIONAL
-● Los usuarios y trabajadores pueden seleccionar algunos ejercicios para ponerlos
-entre los favoritos, útil para poder organizar una clase de entrenamiento.
+## Administrador
 
-● SEMÁFORO DE FLUJO DE TRABAJO
-En proceso 🟡
-Errores por corregir 🔴
-Terminado 🟢
+- Todas las funcionalidades de usuario cliente.
+- Será el único capaz de añadir un nuevo ejercicio con los siguientes detalles:
+  - Nombre
+  - Descripción
+  - Foto
+  - Tipología
+  - Grupo muscular.
 
-● BASES DE DATOS
+## Opcional
 
-### Ejercicios
+- Los usuarios y trabajadores pueden seleccionar algunos ejercicios para ponerlos entre los favoritos, útil para poder organizar una clase de entrenamiento.
+
+### Bases de Datos
+
+#### Favorites
+
+| Campo       | Tipo         | Descripción                             |
+| ----------- | ------------ | --------------------------------------- |
+| Id          | TINYINT(50)  | Identificador único del favorito       |
+| user_id     | INT          | Identificador del usuario que puso el favorito |
+| exercise_id | INT          | Identificador del ejercicio favorito    |
+| created_at  | TIMESTAMP    | Fecha y hora de creación del favorito   |
+
+#### Ejercicios
 
 | Campo       | Tipo         | Descripción                             |
 | ----------- | ------------ | --------------------------------------- |
@@ -46,69 +49,58 @@ Terminado 🟢
 | musclegroup | VARCHAR(100) | Grupo muscular que trabaja el ejercicio |
 | description | TEXT         | Descripción de ejercicio                |
 
-### Ejercicios favoritos
+#### Usuarios (Cliente)
 
-| Campo       | Tipo        | Descripción                       |
-| ----------- | ----------- | --------------------------------- |
-| Id          | TINYINT(50) | Identificador único del ejercicio |
-| user_id     | FOREIGN KEY | Id del usuario                    |
-| exercise_id | FOREIGN KEY | Id del ejercicio                  |
+| Campo       | Tipo         | Descripción                                  |
+| ----------- | ------------ | -------------------------------------------- |
+| id          | INT          | Identificador único del usuario             |
+| email       | VARCHAR(100) | Correo electrónico del usuario              |
+| Name        | VARCHAR(50)  | Nombre del usuario                          |
+| lastName    | VARCHAR(100) | Apellidos del usuario                       |
+| birthDate   | DATETIME     | Fecha de nacimiento del usuario             |
+| photo       | CHAR(100)    | Foto de usuario                             |
+| role        | ENUM         | Rol del usuario ("Cliente") o ("Administrador") |
+| Listar      | VARCHAR(100) | Ver listado y detalle de los ejercicios     |
+| select      | VARCHAR(100) | Seleccionar ejercicios para ponerlos entre los favoritos |
+| like        | VARCHAR(100) | Dar/quitar like a un ejercicio              |
 
-### Usuarios
+### Extensiones NPM Usadas
 
-| Campo | Tipo         | Descripción                     |
-| ----- | ------------ | ------------------------------- |
-| id    | TINYINT(50)  | Identificador único del usuario |
-| email | VARCHAR(100) | Correo electrónico del usuario  |
+#### DevDependencies
 
-| password | VARCHAR(100) | contraseña del usuario |
+- eslint: ^8.45.0
+- nodemon: ^3.0.1
 
-| Name | VARCHAR(50) | Nombre del usuario |
-| lastName | VARCHAR(100) | Apellidos del usuario |
-| birthDate | DATETIME | Fecha de nacimiento del usuario |
-| photo | VARCHAR(100) | foto de usuario |
-| role | ENUM | Rol del usuario ("Cliente") |
-| Listar | VARCHAR(100) | Ver listado y detalle de los ejercicios |
-| select | VARCHAR(100) | Seleccionar ejercicios para ponerlos entre los favoritos |
-| like | VARCHAR(100) | Podrá poner o quitar un like a un ejercicio |
+#### Dependencies
 
-● EXTENSIONES NPM USADAS
+- cors: ^2.8.5
+- dotenv: ^16.3.1
+- express: ^4.18.2
+- express-fileupload: ^1.4.0
+- jsonwebtoken: ^9.0.1
+- morgan: ^1.10.0
+- mysql2: ^3.5.2
+- prettier: ^1.1.0
 
-npm init -y
-npm i express
-npm nodemon -D
-npm mysql2 dotenv
-npm cors
+### CORS
 
-### **Endpoints de Usuarios**
+directorio uploads/fotos como static `<img src="http://localhost:8000/43t4345tg3456g65.jpg">`
 
-- **POST** - [/users/register] - Crea un nuevo usuario pidiendo todos los datos incluida la foto (body formData).
-  🟠 Falta probar postman y revisar las rutas
+### Endpoints de Usuarios
 
-- **POST** - [/users/login] - Logea a un usuario retornando un token, email, avatar y rol.
-  🟠 Falta probar postman y revisar las rutas
-- **GET** - [/users] - devuelve los datos del usuario del token (token)
-  🟠 Falta probar postman y revisar las rutas
+- **POST** - [/users/register] - Crea un nuevo usuario pidiendo todos los datos incluida la foto (body formData). Amalia
+🟠 Falta probar postman y revisar las rutas.
+- **POST** - [/users/login] - Logea a un usuario retornando un token, email, avatar y rol. Amalia
+🟠 Falta probar postman y revisar las rutas.
+- **GET** - [/users] - Devuelve los datos del usuario del token (token) Amalia
+🟠 Falta probar postman y revisar las rutas.
 
-### **Endpoints ejercicios**
 
-- **POST** - [/exercises/addNewExercise] - Permite al administrador subir un ejercicio con foto (body formData). (TOKEN y rol admin)
-  🟠 Falta probar postman y revisar las rutas
+### Endpoints ejercicios
 
-- **DELETE** - [/exercises/:exerciseId/deleteExercise] - Permite al administrador eliminar un ejercicio (TOKEN y rol admin)
-  🟠 Falta probar postman y revisar las rutas
-
-- **GET** - [/exercises/filterExercises/:getAllExercises, :getExerciseById, :getExerciseByName, :getFavoriteExercises, :getExercisesByMuscleGroup] - Permite buscar ejercicios por diferentes métodos de filtrado o mostralos todos. (TOKEN)
-  🟠 Falta probar postman y revisar las rutas
-
-- **GET** - [/exercises/favorite] - Retornar el listado del los ejercicios favoritos del usuario de token (TOKEN)
-  🟠 Falta probar postman y revisar las rutas
-
-- **POST** - [/exercises/:exerciseId/addToFavorites,removeFromFavorites] - Permite a un usuario dar o quitar de favoritos a un ejercicio (tenerlo o no en preferidos). (TOKEN)
-  🟠 Falta probar postman y revisar las rutas
-
-- **GET** - [/exercises/getExerciseInfo] - Retornar información de un ejercicio (incluida la description).
-  🟠 Falta probar postman y revisar las rutas
-
-CORS
-directorio uploads/fotos como static <img src="http://localhost:8000/43t4345tg3456g65.jpg">
+- **POST** - [/exercises/] - Permite al administrador subir un ejercicio con foto (body formData). (TOKEN y rol admin) Susana
+- **DELETE** - [/exercises/:exerciseId] - Permite eliminar un ejercicio (TOKEN y rol admin) Susana
+- **GET** - [/exercises] - Retornar el listado de ejercicios (info si tengo un ejercicio en favorito). (TOKEN)
+  /ejercicies (todo los ejercicios) Ariana
+  Query params:
+  /ejercicies?grupo=superior (todos los ejercicios del grupo especificado)
