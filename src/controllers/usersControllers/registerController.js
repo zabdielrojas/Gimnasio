@@ -1,45 +1,27 @@
-// Importamos las dependencias.
-const bcrypt = require('bcrypt');
-const { User } = require('../models');
-const { missingFieldsError } = require('../services/errorService');
+// Importamos los modelos.
+const insertUserModel = require("../../models/users/insertUserModel");
 
-// Función controladora para registrar un nuevo usuario.
-const registerUser = async (req, res) => {
+const { missingFieldsError } = require("../../services/errorService");
+
+const newUserController = async (req, res, next) => {
   try {
-    const { email, firstName, lastName, birthDate, role, password, photo } = req.body;
+    // Obtenemos los datos necesarios del body.
+    const { name, email, password } = req.body;
 
-    if (!email || !firstName || !lastName || !birthDate || !role || !password || !photo) {
-      // Si faltan campos requeridos, lanzamos un error.
+    if (!email || !password || !name) {
       missingFieldsError();
     }
 
-    // Verificar si el correo electrónico ya está registrado en la base de datos.
-    const existingUser = await User.findOne({ where: { email } });
-    if (existingUser) {
-      return res.status(400).json({ message: 'El correo electrónico ya está registrado.' });
-    }
+    // Insertamos el usuario.
+    await insertUserModel(name, email, password);
 
-    // Encriptar la contraseña antes de guardarla en la base de datos.
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Crear el nuevo usuario en la base de datos.
-    const newUser = await User.create({
-      email,
-      firstName,
-      lastName,
-      birthDate,
-      role,
-      password: hashedPassword,
-      photo,
+    res.send({
+      status: "ok",
+      message: "Usuario creado",
     });
-
-    // Respuesta con el usuario registrado.
-    return res.status(201).json({ message: 'Usuario registrado exitosamente.', user: newUser });
-  } catch (error) {
-    console.error('Error al registrar el usuario:', error);
-    return res.status(500).json({ message: 'Error en el servidor al registrar el usuario.' });
+  } catch (err) {
+    next(err);
   }
 };
 
-// Exportamos la función controladora registerUser.
-module.exports = registerUser;
+module.exports = newUserController;

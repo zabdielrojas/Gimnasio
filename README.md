@@ -28,17 +28,16 @@ Pueden registrarse o hacer login en la aplicación, explorar la lista de ejercic
 
 - Los usuarios y trabajadores pueden seleccionar algunos ejercicios para ponerlos entre los favoritos, útil para poder organizar una clase de entrenamiento.
 
-
 ### Bases de Datos 🗄️
 
 #### Favorites
 
-| Campo       | Tipo         | Descripción                             |
-| ----------- | ------------ | --------------------------------------- |
-| Id          | TINYINT(50)  | Identificador único del favorito       |
-| user_id     | INT          | Identificador del usuario que puso el favorito |
-| exercise_id | INT          | Identificador del ejercicio favorito    |
-| created_at  | TIMESTAMP    | Fecha y hora de creación del favorito   |
+| Campo       | Tipo        | Descripción                                    |
+| ----------- | ----------- | ---------------------------------------------- |
+| Id          | TINYINT(50) | Identificador único del favorito               |
+| user_id     | INT         | Identificador del usuario que puso el favorito |
+| exercise_id | INT         | Identificador del ejercicio favorito           |
+| created_at  | TIMESTAMP   | Fecha y hora de creación del favorito          |
 
 #### Ejercicios
 
@@ -50,21 +49,20 @@ Pueden registrarse o hacer login en la aplicación, explorar la lista de ejercic
 | musclegroup | VARCHAR(100) | Grupo muscular que trabaja el ejercicio |
 | description | TEXT         | Descripción de ejercicio                |
 
-#### Usuarios 
+#### Usuarios
 
-| Campo       | Tipo         | Descripción                                  |
-| ----------- | ------------ | -------------------------------------------- |
-| id          | INT         | Identificador único del usuario             |
-| email       | VARCHAR(100) | Correo electrónico del usuario              |
-| Name        | VARCHAR(50)  | Nombre del usuario                          |
-| lastName    | VARCHAR(100) | Apellidos del usuario                       |
-| birthDate   | DATETIME     | Fecha de nacimiento del usuario             |
-| photo       | CHAR(100)    | Foto de usuario                             |
-| role        | ENUM         | Rol del usuario ("Cliente") o ("Administrador") |
-| Listar      | VARCHAR(100) | Ver listado y detalle de los ejercicios     |
-| select      | VARCHAR(100) | Seleccionar ejercicios para ponerlos entre los favoritos |
-| like        | VARCHAR(100) | Dar/quitar like a un ejercicio              |
-
+| Campo     | Tipo         | Descripción                                              |
+| --------- | ------------ | -------------------------------------------------------- |
+| id        | INT          | Identificador único del usuario                          |
+| email     | VARCHAR(100) | Correo electrónico del usuario                           |
+| Name      | VARCHAR(50)  | Nombre del usuario                                       |
+| lastName  | VARCHAR(100) | Apellidos del usuario                                    |
+| birthDate | DATETIME     | Fecha de nacimiento del usuario                          |
+| photo     | CHAR(100)    | Foto de usuario                                          |
+| role      | ENUM         | Rol del usuario ("Cliente") o ("Administrador")          |
+| Listar    | VARCHAR(100) | Ver listado y detalle de los ejercicios                  |
+| select    | VARCHAR(100) | Seleccionar ejercicios para ponerlos entre los favoritos |
+| like      | VARCHAR(100) | Dar/quitar like a un ejercicio                           |
 
 ### Extensiones NPM Usadas 📦
 
@@ -90,7 +88,6 @@ directorio uploads/fotos como static `<img src="http://localhost:8000/43t4345tg3
 
 ### **Endpoints de Usuarios** 👥
 
-
 - **POST** - [/users/register] - Crea un nuevo usuario pidiendo todos los datos incluida la foto (body formData).
   :large_orange_circle: Falta probar postman y revisar las rutas
 - **POST** - [/users/login] - Logea a un usuario retornando un token, email, avatar y rol.
@@ -100,7 +97,7 @@ directorio uploads/fotos como static `<img src="http://localhost:8000/43t4345tg3
 
 ### **Endpoints ejercicios** 🏋🏻‍♂️
 
-- **POST** - [/exercises/addNewExercise] - Permite al administrador subir un ejercicio con foto (body formData). (TOKEN y rol admin)
+- **POST** - [/exercises] - Permite al administrador subir un ejercicio con foto (body formData). (TOKEN y rol admin)
   :large_orange_circle: Falta probar postman y revisar las rutas
 
 - **DELETE** - [/exercises/:exerciseId/deleteExercise] - Permite al administrador eliminar un ejercicio (TOKEN y rol admin)
@@ -117,4 +114,3 @@ directorio uploads/fotos como static `<img src="http://localhost:8000/43t4345tg3
 
 - **GET** - [/exercises/getExerciseInfo] - Retornar información de un ejercicio (incluida la description).
   :large_orange_circle: Falta probar postman y revisar las rutas
-

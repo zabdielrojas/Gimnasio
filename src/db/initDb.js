@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const bcrypt = require("bcrypt");
 const getDb = require("./getDb");
 
 async function app() {
@@ -41,7 +42,7 @@ async function app() {
         description TEXT,
         muscleGroup ENUM('superior', 'inferior'),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        user_id INT UNSIGNED,
+        user_id INT UNSIGNED NOT NULL,
         FOREIGN KEY (user_id) REFERENCES users(id)
       )
     `);
@@ -63,9 +64,11 @@ async function app() {
     // Creando usuario admin
     const { ADMIN_EMAIL, ADMIN_PWD } = process.env;
 
+    const hashedPassword = await bcrypt.hash(ADMIN_PWD, 10);
+
     await connection.query(
       "INSERT INTO users (email, password, userRole, name) VALUES (?, ?, ?, ?)",
-      [ADMIN_EMAIL, ADMIN_PWD, "admin", "Administrador"]
+      [ADMIN_EMAIL, hashedPassword, "admin", "Administrador"]
     );
 
     console.log("Usuario administrador creado con éxito");

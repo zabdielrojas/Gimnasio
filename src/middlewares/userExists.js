@@ -1,17 +1,17 @@
-// Importamos la función que nos permite obtener una conexión libre con la base de datos.
-const getDb = require("../db/getDb.js");
+// Importamos las dependencias.
+const getDb = require("../db/getDb");
 
 // Importamos los errores.
-const { userAlreadyRegisteredError } = require("../services/errorService");
+const { notFoundError } = require("../services/errorService");
 
-// Función controladora intermedia que lanza un error si no existe el usuario con el id establecido.
+// Función controladora intermedia que lanza un error si no existe un usuario con un id dado.
 const userExists = async (req, res, next) => {
   let connection;
 
   try {
     connection = await getDb();
 
-    const userId = req.user?.id || req.params.userId;
+    const userId = req.user.id;
 
     const [users] = await connection.query(
       `SELECT id FROM users WHERE id = ?`,
@@ -20,7 +20,7 @@ const userExists = async (req, res, next) => {
 
     // Lanzamos un error si el usuario no existe.
     if (users.length < 1) {
-      userAlreadyRegisteredError();
+      notFoundError();
     }
 
     // Pasamos el control a la siguiente función controladora.

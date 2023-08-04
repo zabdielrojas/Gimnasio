@@ -1,20 +1,35 @@
+// Importamos las dependencias.
 const jwt = require("jsonwebtoken");
 
-const authUser = (req, res, next) => {
-  const token = req.header("Authorization");
+// Importamos los errores.
+const {
+  notAuthenticatedError,
+  invalidCredentialsError,
+} = require("../services/errorService");
 
-  if (!token) {
-    return res
-      .status(401)
-      .json({ error: "Acceso no autorizado. Token no proporcionado." });
-  }
-
+const authUser = async (req, res, next) => {
   try {
-    const decoded = jwt.verify(token, process.env.SECRET);
-    req.user = decoded;
+    const { authorization } = req.headers;
+
+    if (!authorization) {
+      notAuthenticatedError();
+    }
+
+    // Variable que almacenará la info del token.
+    let tokenInfo;
+
+    try {
+      tokenInfo = jwt.verify(authorization, process.env.SECRET);
+    } catch (err) {
+      invalidCredentialsError();
+    }
+
+    req.user = tokenInfo; // {id: 1 , role: "Admin"}
+
+    // Pasamos el control a la siguiente función controladora.
     next();
-  } catch (error) {
-    return res.status(401).json({ error: "Token inválido o expirado." });
+  } catch (err) {
+    next(err);
   }
 };
 

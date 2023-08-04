@@ -1,66 +1,59 @@
-// loginUserController.js
+// Importamos las dependencias.
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const { User } = require('../models'); // Asegúrate de importar el modelo User.
+// Importamos los modelos.
+const selectUserByEmailModel = require("../../models/users/selectUserByEmailModel");
 
+// Importamos los errores.
 const {
-  missingFieldsError,
   invalidCredentialsError,
-  pendingActivationError,
-} = require('../services/errorService');
+  missingFieldsError,
+} = require("../../services/errorService");
 
-// Función controladora que logea a un usuario retornando un token.
-const loginUser = async (req, res, next) => {
+// Función controladora final que logea a un usuario retornando un token.
+const loginUserController = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
+    console.log(email, password);
+
     if (!email || !password) {
-      // Si faltan campos requeridos, lanzamos un error.
       missingFieldsError();
     }
 
-    // Buscamos al usuario por su email en la base de datos.
-    const user = await User.findOne({ where: { email } });
+    // Seleccionamos los datos del usuario que necesitamos utilizando el email.
+    const user = await selectUserByEmailModel(email);
 
-    if (!user) {
-      // Si el usuario no existe, lanzamos un error.
-      invalidCredentialsError();
-    }
-
-    // Comprobamos si las contraseñas coinciden.
+    // Comprobamos si la contraseña es válida.
     const validPass = await bcrypt.compare(password, user.password);
 
-    // Si no coinciden, lanzamos un error.
+    // Si las contraseñas no coinciden lanzamos un error.
     if (!validPass) {
       invalidCredentialsError();
     }
 
-    // Si la contraseña es correcta pero el usuario no está activo, lanzamos un error.
-    if (!user.active) {
-      pendingActivationError();
-    }
-
-    // Objeto con info que queremos agregar al token.
+    // Objeto con la información que queremos almacenar en el token.
     const tokenInfo = {
       id: user.id,
-      role: user.role,
+      role: user.userRole,
     };
 
     // Creamos el token.
     const token = jwt.sign(tokenInfo, process.env.SECRET, {
-      expiresIn: '7d',
+      expiresIn: "7d",
     });
 
     res.send({
-      status: 'ok',
+      status: "ok",
       data: {
         token,
       },
     });
   } catch (err) {
+    console.log("ERROR!!!");
     next(err);
   }
 };
 
-module.exports = loginUser;
+module.exports = loginUserController;

@@ -10,7 +10,7 @@ module.exports = {
     throw {
       httpStatus: 409, // Conflict
       code: "EMAIL_ALREADY_REGISTERED",
-      message: "El email ya está registrado",
+      message: "Usuario ya está registrado",
     };
   },
   incorrectRecoveryCodeError() {
@@ -27,6 +27,7 @@ module.exports = {
       message: "Credenciales inválidas",
     };
   },
+
   invalidTokenError() {
     throw {
       httpStatus: 401, // Unauthorized

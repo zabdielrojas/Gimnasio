@@ -2,20 +2,37 @@
 const express = require("express");
 const router = express.Router();
 
+const authUser = require("../middlewares/authUser");
+const userExists = require("../middlewares/userExists");
+const isAdmin = require("../middlewares/isAdmin");
+
 // Rutas de usuarios
 
 // Importamos las funciones controladoras requeridas.
-const { registerUser, loginUser } = require("../controllers/usersController");
+const {
+  loginUserController,
+  registerController,
+  getOwnUserController,
+} = require("../controllers/usersControllers");
 
-// Ruta para registrar un nuevo usuario.
-router.post("/register", registerUser);
+const { addNewExercise } = require("../controllers/exercises");
 
 // Ruta para el login de un usuario.
-router.post("/login", loginUser);
+router.post("/users/login", loginUserController);
+
+// Ruta para registrar un nuevo usuario.
+router.post("/users/register", registerController);
+
+// Obtener perfil privado de un usuario.
+router.get("/users", authUser, userExists, getOwnUserController);
+
+// Nuevo ejercicio
+router.post("/exercises", authUser, userExists, isAdmin, addNewExercise);
 
 // Rutas ejercicios
 
 // Importamos las funciones controladoras requeridas.
+/*
 const {
   addToFavorites,
   addNewExercise,
@@ -71,5 +88,6 @@ router.post("..addExercisesModel.js", addExercisesModel);
 // Ruta que elimina ejercicios directamente en la base de datos.
 
 router.delete("..deleteExercisesModel.js", deleteExerciseModel);
+*/
 
 module.exports = router;
