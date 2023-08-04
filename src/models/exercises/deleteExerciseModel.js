@@ -4,10 +4,10 @@ require("dotenv").config();
 const getDb = require("../../db/getDb");
 
 async function deleteExercisesModel(exerciseId) {
-    let connection;
-    try {
-      connection = await getDb();
-    
+  let connection;
+  try {
+    connection = await getDb();
+
     // Primero verificamos que el ejercicio existe
     const exercise = await connection.query(
       `SELECT id FROM exercises WHERE id = ?`,
@@ -21,7 +21,6 @@ async function deleteExercisesModel(exerciseId) {
 
     // Si todo está en orden, procedemos a eliminar el ejercicio
     await connection.query(`DELETE FROM exercises WHERE id = ?`, [exerciseId]);
-
   } finally {
     if (connection) connection.release();
   }

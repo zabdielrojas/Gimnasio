@@ -1,9 +1,9 @@
 const addNewExercise = require("./addNewExercises");
 const deleteExercises = require("./deleteExercises");
-const favoriteExercises = require("./exercisesFavorite");
+const favoriteExercises = require("./favoriteExercises");
 
-module.exports = { 
-    addNewExercise,
-    deleteExercises,
-    favoriteExercises
- };
+module.exports = {
+  addNewExercise,
+  deleteExercises,
+  favoriteExercises,
+};

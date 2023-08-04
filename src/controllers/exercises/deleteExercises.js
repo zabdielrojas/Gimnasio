@@ -1,14 +1,13 @@
 require("dotenv").config();
 
 // Importamos la función que nos permite obtener una conexión libre con la base de datos.
-const getDb = require("./getDb");
+const getDb = require("../../db/getDb");
 
 // Importamos los modelos
-const deleteExerciseModel = require("..deleteExercisesModel.js");
+const deleteExerciseModel = require("../../models/exercises/deleteExerciseModel");
 const { missingFieldsError } = require("../../services/errorService");
 
-
-const getExerciseByIdModel = require ("../../models/exercises/deleteExerciseModel")
+const getExerciseByIdModel = require("../../models/exercises/deleteExerciseModel");
 // Función controladora que elimina un ejercicio desde el administrador.
 const deleteExercise = async (req, res, next) => {
   try {
@@ -21,7 +20,6 @@ const deleteExercise = async (req, res, next) => {
     const exercise = await getExerciseByIdModel(id);
     if (!exercise) {
       missingFieldsError();
-      
     }
     // Delete the exercise
     await deleteExerciseModel(id);
@@ -36,6 +34,3 @@ const deleteExercise = async (req, res, next) => {
 module.exports = deleteExercise;
 
 getDb();
-
-
-

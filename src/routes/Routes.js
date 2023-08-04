@@ -16,6 +16,7 @@ const {
 } = require("../controllers/usersControllers");
 
 const { addNewExercise } = require("../controllers/exercises");
+const { deleteExercise } = require("../controllers/exercises");
 
 // Ruta para el login de un usuario.
 router.post("/users/login", loginUserController);
@@ -28,6 +29,9 @@ router.get("/users", authUser, userExists, getOwnUserController);
 
 // Nuevo ejercicio
 router.post("/exercises", authUser, userExists, isAdmin, addNewExercise);
+
+// Eliminar ejercicio
+router.post("/exercises", authUser, userExists, isAdmin, deleteExercise);
 
 // Rutas ejercicios
 
