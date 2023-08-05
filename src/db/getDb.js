@@ -17,7 +17,6 @@ const getDb = async () => {
       });
 
       // Verificar la conexión exitosa
-      console.log("Connecting to the database...");
       await dbConnection.query("SELECT 1");
 
       // Creamos un grupo de conexiones.

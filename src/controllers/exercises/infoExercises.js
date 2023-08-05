@@ -1,4 +1,4 @@
-const getDb = require("./getDb");
+const getDb = require("../../db/getDb");
 
 async function getExerciseInfo(exerciseId) {
   let connection;

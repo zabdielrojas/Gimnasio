@@ -16,8 +16,10 @@ const {
 } = require("../controllers/usersControllers");
 
 const { addNewExercise } = require("../controllers/exercises");
-const { deleteExercise } = require("../controllers/exercises");
-
+const { deleteExercises } = require("../controllers/exercises");
+const {favoriteExercises} = require("../controllers/exercises");
+const {filterExercises} = require("../controllers/exercises");
+const{getExerciseInfo} = require("../controllers/exercises");
 // Ruta para el login de un usuario.
 router.post("/users/login", loginUserController);
 
@@ -28,70 +30,20 @@ router.post("/users/register", registerController);
 router.get("/users", authUser, userExists, getOwnUserController);
 
 // Nuevo ejercicio
-router.post("/exercises", authUser, userExists, isAdmin, addNewExercise);
+router.post("/exercises/newExercise", authUser, userExists, isAdmin, addNewExercise);
 
 // Eliminar ejercicio
-router.delete("/exercises", authUser, userExists, isAdmin, deleteExercise);
+router.delete("/exercises/delete", authUser, userExists, isAdmin, deleteExercises);
 
-// Rutas ejercicios
+// Ejercicios favoritos
+router.get("/exercises/favorite",authUser, userExists, isAdmin, favoriteExercises);
 
-// Importamos las funciones controladoras requeridas.
-/*
-const {
-  addToFavorites,
-  addNewExercise,
-  deleteExercise,
-  getExerciseById,
-  getExerciseByName,
-  getFavoriteExercises,
-  getExercisesByMuscleGroup,
-  getExerciseInfo,
-  removeFromFavorites,
-  getAllExercises,
-} = require("src/controllers/exercises");
+// Filtrar ejercicios
+router.get("/exercises/filterExercise", authUser, userExists, filterExercises);
 
-// ruta para que un usuario agregue un ejercicio a favoritos en la base de datos.
-router.get("..addExercisesFavorite.js", addToFavorites);
+// Obtener información de los ejercicios
+router.get("/exercises/infoExercises", authUser, userExists,getExerciseInfo );
 
-// ruta para que un usuario agregue un ejercicio a favoritos en la base de datos.
-router.get("..deleteExercisesFavorite.js", removeFromFavorites);
 
-// ruta para que el administrador agregue un ejercicio a la base de datos.
-
-router.post("..addNewExercises.js", addNewExercise);
-
-// ruta para que el administrador elimine un ejercicio a la base de datos.
-
-router.delete("..deleteExercises.js", deleteExercise);
-
-// ruta para que un usuario busque un ejercicio por diferentes modos de filtrado en la base de datos.
-
-router.get(
-  "..filterExercises.js",
-  getAllExercises,
-  getExerciseById,
-  getExerciseByName,
-  getFavoriteExercises,
-  getExercisesByMuscleGroup
-);
-
-// Ruta que devuelve la información de un ejercicio
-
-router.get("..filterExercises.js", getExerciseInfo);
-
-// Importamos las funciones controladoras requeridas.
-
-const {
-  addExercisesModel,
-  deleteExerciseModel,
-} = require("srcmodel\\exercises");
-
-// Ruta que agrega los primeros ejercicios a la base de datos.
-router.post("..addExercisesModel.js", addExercisesModel);
-
-// Ruta que elimina ejercicios directamente en la base de datos.
-
-router.delete("..deleteExercisesModel.js", deleteExerciseModel);
-*/
 
 module.exports = router;

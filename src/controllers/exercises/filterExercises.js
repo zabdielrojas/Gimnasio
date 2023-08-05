@@ -1,32 +1,28 @@
+
 require("dotenv").config();
+const getDb = require("../../db/getDb");
 
-const getDb = require("./getDb");
-
-// Función que retorna el listado de todos los ejercicios.
-
-async function getAllExercises() {
+async function filterExercises(options = {}) {
   let connection;
   try {
     connection = await getDb();
-    const [results] = await connection.query("SELECT * FROM exercises");
-    return results;
-  } catch (err) {
-    console.error(err);
-  } finally {
-    if (connection) connection.release();
-  }
-}
-
-// Función que retorna los ejercicios por su Id.
-
-async function getExerciseById(exercise_id) {
-  let connection;
-  try {
-    connection = await getDb();
-    const [result] = await connection.query(
-      "SELECT * FROM exercises WHERE id = ?",
-      [exercise_id]
-    );
+    let query = "SELECT * FROM exercises";
+    let queryParams = [];
+    if (options.exercise_id) {
+      query += " WHERE id = ?";
+      queryParams.push(options.exercise_id);
+    } else if (options.name) {
+      query += " WHERE name LIKE ?";
+      queryParams.push(`%${options.name}%`);
+    } else if (options.user_id) {
+      query =
+        "SELECT e.* FROM exercises e JOIN favorites f ON e.id = f.exercise_id WHERE f.user_id = ?";
+      queryParams.push(options.user_id);
+    } else if (options.muscleGroup) {
+      query += " WHERE muscleGroup = ?";
+      queryParams.push(options.muscleGroup);
+    }
+    const [result] = await connection.query(query, queryParams);
     return result;
   } catch (err) {
     console.error(err);
@@ -35,64 +31,4 @@ async function getExerciseById(exercise_id) {
   }
 }
 
-// Función que retorna los ejercicios por su nombre.
-
-async function getExerciseByName(name) {
-  let connection;
-  try {
-    connection = await getDb();
-    const [result] = await connection.query(
-      "SELECT * FROM exercises WHERE name LIKE ?",
-      [`%${name}%`]
-    );
-    return result;
-  } catch (err) {
-    console.error(err);
-  } finally {
-    if (connection) connection.release();
-  }
-}
-
-// Función que retorna los ejercicios que un usuario a seleccionado en favoritos.
-
-async function getFavoriteExercises(user_id) {
-  let connection;
-  try {
-    connection = await getDb();
-    const [result] = await connection.query(
-      "SELECT e.* FROM exercises e JOIN favorites f ON e.id = f.exercise_id WHERE f.user_id = ?",
-      [user_id]
-    );
-    return result;
-  } catch (err) {
-    console.error(err);
-  } finally {
-    if (connection) connection.release();
-  }
-}
-
-// Función que retorna los ejercicios por el grupo muscular.
-
-async function getExercisesByMuscleGroup(muscleGroup) {
-  let connection;
-  try {
-    connection = await getDb();
-    const [result] = await connection.query(
-      "SELECT * FROM exercises WHERE muscleGroup = ?",
-      [muscleGroup]
-    );
-    return result;
-  } catch (err) {
-    console.error(err);
-  } finally {
-    if (connection) connection.release();
-  }
-}
-
-module.exports = {
-  getAllExercises,
-  getExerciseById,
-  getExerciseByName,
-  getFavoriteExercises,
-  getExercisesByMuscleGroup,
-};
+module.exports = filterExercises;
