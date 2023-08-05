@@ -2,21 +2,22 @@ require("dotenv").config();
 
 // Importamos la función que nos permite obtener una conexión libre con la base de datos.
 const getDb = require("../../db/getDb");
-const savePhotoService = require("../../services/savePhotoService");
+const deletePhotoService = require("../../services/deletePhotoService");
 // Importamos los modelos
 //const insertExerciseModel = require("..addExercisesModel.js");
-const insertExerciseModel = require("../../models/exercises/addExercisesModel");
+const deleteExerciseModel = require("../../models/exercises/deleteExerciseModel");
 const { missingFieldsError } = require("../../services/errorService");
 
 // Función controladora  que crea un nuevo ejercicio desde administrador.
-const addNewExercise = async (req, res, next) => {
+const deleteExercise = async (req, res, next) => {
   try {
     const { name, description, muscleGroup } = req.body;
-    //console.log(name, description, muscleGroup);
+
+    console.log(name, description, muscleGroup);
 
     let photoName;
     if (req.files) {
-      photoName = await savePhotoService(req.files.photo, 500);
+      photoName = await deletePhotoService(req.files.photo, 500);
     }
 
     // comprobar que tenemos los campos obligatorios
@@ -24,9 +25,9 @@ const addNewExercise = async (req, res, next) => {
       missingFieldsError();
     }
 
-    // Registramos el entrenamiento.
+    // Eliminamos el entrenamiento.
 
-    await insertExerciseModel({
+    await deleteExerciseModel({
       name,
       photoName,
       description,
@@ -36,12 +37,12 @@ const addNewExercise = async (req, res, next) => {
 
     res.status(201).send({
       status: "ok",
-      message: "Ejercicio creado",
+      message: "Ejercicio eliminado",
     });
   } catch (err) {
     next(err);
   }
 };
 
-module.exports = addNewExercise;
+module.exports = deleteExercise;
 getDb();

@@ -1,5 +1,5 @@
 const addNewExercise = require("./addNewExercises");
-const deleteExercises = require("./deleteExercises");
+const deleteExercises = require("./deleteExercisescopy");
 const favoriteExercises = require("./favoriteExercises");
 const filterExercises = require("./filterExercises");
 const getExerciseInfo = require("./infoExercises");

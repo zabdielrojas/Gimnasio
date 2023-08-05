@@ -3,7 +3,7 @@ module.exports = {
     throw {
       httpStatus: 500, // Internal server error
       code: "FILE_DELETE_FAILED",
-      message: "Error al eliminar el archivo del disco",
+      message: "Error al eliminar el archivo.",
     };
   },
   emailAlreadyRegisteredError() {
