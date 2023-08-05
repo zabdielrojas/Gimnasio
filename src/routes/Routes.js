@@ -31,7 +31,7 @@ router.get("/users", authUser, userExists, getOwnUserController);
 router.post("/exercises", authUser, userExists, isAdmin, addNewExercise);
 
 // Eliminar ejercicio
-router.post("/exercises", authUser, userExists, isAdmin, deleteExercise);
+router.delete("/exercises", authUser, userExists, isAdmin, deleteExercise);
 
 // Rutas ejercicios
 

@@ -7,7 +7,7 @@ const getDb = require("../../db/getDb");
 const deleteExerciseModel = require("../../models/exercises/deleteExerciseModel");
 const { missingFieldsError } = require("../../services/errorService");
 
-const getExerciseByIdModel = require("../../models/exercises/deleteExerciseModel");
+const getExerciseByIdModel = require("../../models/exercises/getExerciseByIdModel");
 // Función controladora que elimina un ejercicio desde el administrador.
 const deleteExercise = async (req, res, next) => {
   try {
