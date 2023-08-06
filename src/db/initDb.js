@@ -59,7 +59,7 @@ async function app() {
     )
   `);
 
-    console.log("¡Tablas creadas!");
+    //console.log("¡Tablas creadas!");
 
     // Creando usuario admin
     const { ADMIN_EMAIL, ADMIN_PWD } = process.env;
