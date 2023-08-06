@@ -8,10 +8,7 @@ const validateSchemaService = require("../../services/validateSchemaService");
 const loginUserSchema = require("../../schemas/loginUserSchema");
 
 // Importamos los errores.
-const {
-  invalidCredentialsError,
-  pendingActivationError,
-} = require("../../services/errorService");
+const { errorPasswordEmail } = require("../../services/errorService");
 
 // Función controladora final que logea a un usuario retornando un token.
 const loginUserController = async (req, res, next) => {
@@ -36,12 +33,7 @@ const loginUserController = async (req, res, next) => {
     // Si las contraseña no coincide o no existe un usuario con el email proporcionado
     // lanzamos un error.
     if (!user || !validPass) {
-      invalidCredentialsError();
-    }
-
-    // Si el usuario no está activo lanzamos un error.
-    if (!user.active) {
-      pendingActivationError();
+      errorPasswordEmail();
     }
 
     // Objeto con la información que queremos almacenar en el token.

@@ -89,16 +89,12 @@ directorio uploads/fotos como static `<img src="http://localhost:8000/43t4345tg3
 ### **Endpoints de Usuarios** 👥
 
 - **POST** - [/users/register] - Crea un nuevo usuario pidiendo todos los datos incluida la foto (body formData).
-  :large_orange_circle: Falta probar postman y revisar las rutas
 - **POST** - [/users/login] - Logea a un usuario retornando un token, email, avatar y rol.
-  :large_orange_circle: Falta probar postman y revisar las rutas
 - **GET** - [/users] - devuelve los datos del usuario del token (token)
-  :large_orange_circle: Falta probar postman y revisar las rutas
 
 ### **Endpoints ejercicios** 🏋🏻‍♂️
 
 - **POST** - [/exercises] - Permite al administrador subir un ejercicio con foto (body formData). (TOKEN y rol admin)
-  :large_orange_circle: Falta probar postman y revisar las rutas
 
 - **DELETE** - [/exercises/:exerciseId/deleteExercise] - Permite al administrador eliminar un ejercicio (TOKEN y rol admin)
   :large_orange_circle: Falta probar postman y revisar las rutas
