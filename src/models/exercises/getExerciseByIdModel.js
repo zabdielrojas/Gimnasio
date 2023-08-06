@@ -2,7 +2,7 @@
 const getDb = require("../../db/getDb");
 
 // Función que realiza una consulta a la base de datos para seleccionar a un ejercicio por su id.
-const getExerciseByIdModel = async (id) => {
+const getExerciseByIdModel = async (exercise_id) => {
   let connection;
 
   try {
@@ -11,7 +11,7 @@ const getExerciseByIdModel = async (id) => {
     // Comprobamos si hay algún ejercicio con el email proporcionado.
     const [exercise] = await connection.query(
       "SELECT * FROM exercises WHERE id = ?",
-      [id]
+      [exercise_id]
     );
 
     // El array de ejercicios solo podrá contener un único ejercicio con ese id

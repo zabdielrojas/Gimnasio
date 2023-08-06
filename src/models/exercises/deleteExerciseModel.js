@@ -5,7 +5,7 @@ const getDb = require("../../db/getDb");
 
 const deletePhotoService = require("../../services/deletePhotoService");
 
-async function deleteExercisesModel(id) {
+async function deleteExercisesModel(exercise_id) {
   let connection;
   try {
     connection = await getDb();
@@ -13,7 +13,7 @@ async function deleteExercisesModel(id) {
     // Primero verificamos que el ejercicio existe
     const [exercise] = await connection.query(
       `SELECT id, photoName FROM exercises WHERE id = ?`,
-      [id]
+      [exercise_id]
     );
 
     // Si el ejercicio no existe, lanzamos un error
@@ -25,7 +25,7 @@ async function deleteExercisesModel(id) {
     await deletePhotoService(exercise[0].photoName);
 
     // Si todo está en orden, procedemos a eliminar el ejercicio
-    await connection.query(`DELETE FROM exercises WHERE id = ?`, [id]);
+    await connection.query(`DELETE FROM exercises WHERE id = ?`, [exercise_id]);
   } finally {
     if (connection) connection.release();
   }

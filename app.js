@@ -16,7 +16,7 @@ const app = express();
 
 // Middleware que deserializa un body en formato raw creando la propiedad body
 // en el objeto request.
-app.use(express.json());
+app.use(express.json()).use(express.urlencoded({ extended: true }));
 
 // Middleware que deserializa un body en formato form-data creando la propiedad body
 // en el objeto request y, si hay algún archivo, la propiedad files.

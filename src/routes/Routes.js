@@ -40,7 +40,6 @@ router.post(
   isAdmin,
   addNewExercise
 );
-
 // Eliminar ejercicio
 router.delete(
   "/exercises/deleteExercise",
