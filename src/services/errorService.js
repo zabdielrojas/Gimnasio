@@ -57,12 +57,11 @@ module.exports = {
       message: "El recurso requerido no existe",
     };
   },
-  pendingActivationError() {
+  errorPasswordEmail() {
     throw {
       httpStatus: 403, // Forbidden
-      code: "PENDING_ACTIVATION",
-      message:
-        "Usuario pendiente de activar. Por favor, verifica tu cuenta antes de continuar.",
+      code: "ERROR_EMAIL_PASSWORD",
+      message: "La contraseña o el email no son correctos.",
     };
   },
 
