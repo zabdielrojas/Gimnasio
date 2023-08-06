@@ -4,7 +4,6 @@ require("dotenv").config();
 const getDb = require("../../db/getDb");
 const savePhotoService = require("../../services/savePhotoService");
 // Importamos los modelos
-//const insertExerciseModel = require("..addExercisesModel.js");
 const insertExerciseModel = require("../../models/exercises/addExercisesModel");
 const { missingFieldsError } = require("../../services/errorService");
 
