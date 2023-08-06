@@ -1,12 +1,12 @@
 const getDb = require("../../db/getDb");
 
-async function getExerciseInfo(id) {
+async function getExerciseInfo(exercise_id) {
   let connection;
   try {
     connection = await getDb();
     const [exercise] = await connection.query(
       "SELECT * FROM exercises WHERE id = ?",
-      [id]
+      [exercise_id]
     );
     return exercise;
   } catch (err) {
