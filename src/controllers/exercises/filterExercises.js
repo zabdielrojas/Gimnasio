@@ -1,4 +1,3 @@
-
 require("dotenv").config();
 const getDb = require("../../db/getDb");
 
@@ -21,6 +20,7 @@ async function filterExercises(options = {}) {
     } else if (options.muscleGroup) {
       query += " WHERE muscleGroup = ?";
       queryParams.push(options.muscleGroup);
+      console.log("sentadilla");
     }
     const [result] = await connection.query(query, queryParams);
     return result;
