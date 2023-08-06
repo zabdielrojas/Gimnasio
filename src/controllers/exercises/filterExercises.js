@@ -5,6 +5,17 @@ async function filterExercises(options = {}) {
   let connection;
   try {
     connection = await getDb();
+    // Verificar si el usuario está registrado
+    if (options.user_id) {
+      const [user] = await connection.query(
+        "SELECT * FROM users WHERE id = ?",
+        [options.user_id]
+      );
+      if (!user.length) {
+        throw new Error("El usuario no está registrado");
+      }
+    }
+    // Filtrar ejercicios
     let query = "SELECT * FROM exercises";
     let queryParams = [];
     if (options.exercise_id) {
