@@ -15,11 +15,14 @@ const {
   getOwnUserController,
 } = require("../controllers/usersControllers");
 
-const { addNewExercise } = require("../controllers/exercises");
-const { deleteExercises } = require("../controllers/exercises");
-const { favoriteExercises } = require("../controllers/exercises");
-const { filterExercises } = require("../controllers/exercises");
-const { getExerciseInfo } = require("../controllers/exercises");
+const {
+  addNewExercise,
+  deleteExercises,
+  favoriteExercises,
+  filterExercises,
+  getExerciseInfo,
+} = require("../controllers/exercises");
+
 // Ruta para el login de un usuario.
 router.post("/users/login", loginUserController);
 
