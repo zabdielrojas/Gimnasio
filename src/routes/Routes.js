@@ -57,7 +57,7 @@ router.get(
 );
 
 // Filtrar ejercicios
-router.get("/exercises/filterExercise", authUser, userExists, filterExercises);
+router.get("/exercises/filterExercises", userExists, filterExercises);
 
 // Obtener información de los ejercicios
 router.get("/exercises/infoExercises", authUser, userExists, getExerciseInfo);
