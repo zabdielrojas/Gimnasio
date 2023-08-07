@@ -4,33 +4,28 @@ require("dotenv").config();
 const getDb = require("../../db/getDb");
 
 async function exercisesFavorite(req, res) {
-  //Verificar si el usuario está autenticado
-  if (!req.user || !req.user.id) {
-    return res
-      .status(401)
-      .json({ error: "Debe estar autentificado para acceder a esta ruta" });
+  const { user_id, exercise_id } = req.query;
+  if (Object.keys(req.query).length === 0) {
+    return res.status(400).json("No hay parámetros");
   }
-  //Obtener los parámetros userId y exerciseId
-  const user_Id = req.user.id;
-  const exercise_Id = req.query.exerciseId;
 
   let connection;
   try {
     connection = await getDb();
     const [result] = await connection.query(
       "SELECT * FROM favorites WHERE user_id = ? AND exercise_id = ?",
-      [user_Id, exercise_Id]
+      [user_id, exercise_id]
     );
     if (result.length > 0) {
       await connection.query(
         "DELETE FROM favorites WHERE user_id = ? AND exercise_id = ?",
-        [user_Id, exercise_Id]
+        [user_id, exercise_id]
       );
       return res.json({ message: "Ejercicio eliminado de favoritos" });
     } else {
       await connection.query(
         "INSERT INTO favorites (user_id, exercise_id) VALUES (?, ?)",
-        [user_Id, exercise_Id]
+        [user_id, exercise_id]
       );
       return res.json({ message: "Ejercicio añadido a favoritos" });
     }
