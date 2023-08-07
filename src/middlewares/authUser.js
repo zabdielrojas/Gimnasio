@@ -10,6 +10,7 @@ const {
 const authUser = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
+    console.log({ PRUEBA: authorization });
 
     if (!authorization) {
       notAuthenticatedError();
