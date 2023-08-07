@@ -4,7 +4,9 @@ require("dotenv").config();
 const getDb = require("../../db/getDb");
 
 async function exercisesFavorite(req, res) {
-  const { user_id, exercise_id } = req.query;
+  const { exercise_id } = req.query;
+  const user_id = req.user.id;
+
   if (Object.keys(req.query).length === 0) {
     return res.status(400).json("No hay parámetros");
   }

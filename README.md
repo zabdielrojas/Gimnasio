@@ -96,17 +96,22 @@ directorio uploads/fotos como static `<img src="http://localhost:8000/43t4345tg3
 
 - **POST** - [/exercises] - Permite al administrador subir un ejercicio con foto (body formData). (TOKEN y rol admin)
 
-- **DELETE** - [/exercises/:exerciseId/deleteExercise] - Permite al administrador eliminar un ejercicio (TOKEN y rol admin)
+- **DELETE** - [/exercises/:exerciseId] - Permite al administrador eliminar un ejercicio (TOKEN y rol admin)
   :large_orange_circle: Falta probar postman y revisar las rutas
 
-- **GET** - [/exercises/filterExercises/:getAllExercises, :getExerciseById, :getExerciseByName, :getFavoriteExercises, :getExercisesByMuscleGroup] - Permite buscar ejercicios por diferentes métodos de filtrado o mostralos todos. (TOKEN)
+- **GET** - [/exercises/] - devuelve todos los ejercicios (siempre devolvemos con ORDER BY nobre ejercicio)
+- [/exercises?search="sentadillas"] - devuelve todos los ejercicio que tengan en el nombre o desc "sentadillas"
+- [/exercises?grupo="inferior"] - devuelve todos los ejercicio del grupo inferior
+- [/exercises?grupo="inferior"&favoritos="no"] - devuelve todos los ejercicio del grupo inferior que no tengo en favoritos
+- [/exercises?favoritos="no"] - devuelve todos los ejercicio que no tengo en favoritos
+  Permite buscar ejercicios por diferentes métodos de filtrado o mostralos todos. (TOKEN)
   :large_orange_circle: Falta probar postman y revisar las rutas
 
 - **GET** - [/exercises/favorite] - Retornar el listado del los ejercicios favoritos del usuario de token (TOKEN)
   :large_orange_circle: Falta probar postman y revisar las rutas
 
-- **POST** - [/exercises/:exerciseId/addToFavorites,removeFromFavorites] - Permite a un usuario dar o quitar de favoritos a un ejercicio (tenerlo o no en preferidos). (TOKEN)
+- **POST** - [/exercises/:exerciseId] - Permite a un usuario dar o quitar de favoritos a un ejercicio (tenerlo o no en preferidos). (TOKEN)
   :large_orange_circle: Falta probar postman y revisar las rutas
 
-- **GET** - [/exercises/getExerciseInfo] - Retornar información de un ejercicio (incluida la description).
+- **GET** - [/exercises/:exerciseId] - Retornar información de un ejercicio (incluida la description).
   :large_orange_circle: Falta probar postman y revisar las rutas

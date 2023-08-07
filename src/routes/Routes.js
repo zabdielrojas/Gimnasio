@@ -50,10 +50,15 @@ router.delete(
 );
 
 // Ejercicios favoritos
-router.get("/exercises/favoriteExercises", favoriteExercises);
+router.get(
+  "/exercises/favoriteExercises",
+  authUser,
+  userExists,
+  favoriteExercises
+);
 
 // Filtrar ejercicios
-router.get("/exercises/filterExercises", filterExercises);
+router.get("/exercises/", authUser, userExists, filterExercises);
 
 // Obtener información de los ejercicios
 router.get("/exercises/infoExercises", getExerciseInfo);
