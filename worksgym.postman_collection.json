@@ -520,7 +520,7 @@
 					"response": []
 				},
 				{
-					"name": "favoritosErrorToken",
+					"name": "favoritosadd",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -529,52 +529,9 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkxMzUyMTExLCJleHAiOjE2OTE5NTY5MTF9.fGU5ZgYBz6jZ8aUD0A9bn4rQ8Dpvv79V4DRSE0zXNj0",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkxMzYwOTk3LCJleHAiOjE2OTE5NjU3OTd9.UH3JIgvLuWZy1ex6bAJ_HISGjxajbop7RQ3Qpia7Xig",
 								"type": "text",
 								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "http://localhost:8000/exercises/favorite?exerciseId=1&userId=1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"exercises",
-								"favorite"
-							],
-							"query": [
-								{
-									"key": "exerciseId",
-									"value": "1"
-								},
-								{
-									"key": "userId",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "favoritos",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkxMzU2Njk2LCJleHAiOjE2OTE5NjE0OTZ9.ON8kqZjLw4gjACNMyO-5mdeDlGXsmx8YbbztLBImDlU",
-								"type": "text"
 							}
 						],
 						"body": {
