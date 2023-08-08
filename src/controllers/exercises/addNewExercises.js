@@ -36,6 +36,7 @@ const addNewExercise = async (req, res, next) => {
     res.status(201).send({
       status: "ok",
       message: "Ejercicio creado",
+      
     });
   } catch (err) {
     next(err);
