@@ -1,0 +1,386 @@
+{
+	"info": {
+		"_postman_id": "3e2e6743-b034-408a-829e-5d87f45e2d62",
+		"name": "Gimnasio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28446706"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ste@example.com\",\r\n    \"password\": \"123456\",\r\n    \"name\": \"ste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loginAdmin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": \"contraseña_segura\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loginCliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ste@example.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOwnUserData",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImNsaWVudGUiLCJpYXQiOjE2OTExNjk5MTYsImV4cCI6MTY5MTc3NDcxNn0.EAtokX4KSL9zwDY3ESFlb8O4StSu09MWjE7OF6cgLsU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Excercise",
+			"item": [
+				{
+					"name": "Nuevoejercicio",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjkxNDgxMzQ5LCJleHAiOjE2OTIwODYxNDl9.SlDdKsAqTb7TRxBm6_zIY0c1MsK8YOxjESy6V7tTwys",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "abdominales",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "consiste en flexionar las rodillas y bajar el cuerpo manteniendo la verticalidad, para luego regresar a una posición erguida.",
+									"type": "text"
+								},
+								{
+									"key": "muscleGroup",
+									"value": "superior",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/zabdi/Downloads/npm-iKTgOmEc6a-650w.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/exercises/newExercise",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"exercises",
+								"newExercise"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Nuevoejercicio2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjkxMjI5MDkxLCJleHAiOjE2OTE4MzM4OTF9.DKk-ylpaN2Ug19J6JaevIYEZUsLtbsHWto_3oOVd05I",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "sentadilla",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "consiste en flexionar las rodillas y bajar el cuerpo manteniendo la verticalidad, para luego regresar a una posición erguida.",
+									"type": "text"
+								},
+								{
+									"key": "muscleGroup",
+									"value": "inferior",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/Usuario/Desktop/511052.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/exercises/newExercise",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"exercises",
+								"newExercise"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LikeExcercise",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjkxNDc1NjQwLCJleHAiOjE2OTIwODA0NDB9.xdj48pEQdSdjqz7ghsfcAcbZ7uRFKz8MxDyZB_76RC4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/exercises/favoriteExercises?exercise_id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"exercises",
+								"favoriteExercises"
+							],
+							"query": [
+								{
+									"key": "exercise_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FilterExcercise",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:4000/exercises/newExercise",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"exercises",
+								"newExercise"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetInfoEcercise",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/exercises/infoExercises?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"exercises",
+								"infoExercises"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteExercises",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjkxMjMyNTQyLCJleHAiOjE2OTE4MzczNDJ9.7ilNXtxQR-tPOOFrVHRRbSIz4dCRQZtPHUBvW0LGYqQ",
+								"type": "text"
+							},
+							{
+								"key": "userRole",
+								"value": "admin",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "name",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "desc",
+									"type": "text"
+								},
+								{
+									"key": "muscleGroup",
+									"value": "inferior",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/Usuario/Desktop/511052.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/exercises/delete?exerciseId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"exercises",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "userRole",
+									"value": "admin",
+									"disabled": true
+								},
+								{
+									"key": "exerciseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

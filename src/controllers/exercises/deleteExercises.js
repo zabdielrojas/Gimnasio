@@ -9,6 +9,7 @@ const deleteExerciseModel = require("../../models/exercises/deleteExerciseModel"
 const deleteExercise = async (req, res, next) => {
   try {
     const { id } = req.body;
+    console.log("Hola ",id)
 
     // Comprobar si el usuario tiene un rol de administrador
     if (req.user.role !== "admin") {

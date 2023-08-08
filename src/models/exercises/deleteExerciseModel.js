@@ -12,9 +12,10 @@ async function deleteExercisesModel(exercise_id) {
 
     // Primero verificamos que el ejercicio existe
     const [exercise] = await connection.query(
-      `SELECT id, photoName FROM exercises WHERE id = ?`,
+      `SELECT id, photo FROM exercises WHERE id = ?`,
       [exercise_id]
     );
+    console.log(exercise_id)
 
     // Si el ejercicio no existe, lanzamos un error
     if (exercise.length === 0) {
@@ -22,7 +23,7 @@ async function deleteExercisesModel(exercise_id) {
     }
 
     // Eliminamos la foto asociada al ejercicio
-    await deletePhotoService(exercise[0].photoName);
+    await deletePhotoService(exercise[0].photo);
 
     // Si todo está en orden, procedemos a eliminar el ejercicio
     await connection.query(`DELETE FROM exercises WHERE id = ?`, [exercise_id]);
